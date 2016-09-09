@@ -13,15 +13,19 @@ import java.util.Scanner;
  * @author Oskari Liukku
  */
 class Mainclass{
-    BottleDispenser disp;
-    
-    public void main(String[] args) {
-        disp = new BottleDispenser();
+    BottleDispenser disp = new BottleDispenser();
+    public static void main(String[] args) {
         
+        Mainclass mainclass = new Mainclass();
+        boolean shutdown = false;
+        
+        do{
+            shutdown = mainclass.Menu();
+        }while(shutdown == false);
     }
     
-    void PrintMenu(){
-        System.out.println("*** LIMSA-AUTOMAATTI ***\n" +
+    boolean Menu(){
+        System.out.println("\n*** LIMSA-AUTOMAATTI ***\n" +
 "1) Lisää rahaa koneeseen\n" +
 "2) Osta pullo\n" +
 "3) Ota rahat ulos\n" +
@@ -30,11 +34,33 @@ class Mainclass{
         System.out.print("Valintasi: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
+        
+        switch(choice){
+            case 1:
+                disp.addMoney();
+                break;
+            case 2:
+                disp.buyBottle();
+                break;
+            case 3:
+                disp.returnMoney();
+                break;
+            case 4:
+                ListBottles();
+                break;
+            default:
+                return true;
+             
+        }
+        return false;
     }
     
     void ListBottles(){
+        Bottle b;
         for(int i = 0; i < disp.bottle_array.size(); i++){
-            
+            b = (Bottle)disp.bottle_array.get(i);
+            System.out.println((i+1) + ". Nimi: " + b.name);
+            System.out.println("\tKoko: " + b.size + "\tHinta: " + b.price);
         }
     }
 }
@@ -50,7 +76,7 @@ class BottleDispenser {
         money = 0;
         bottle_array = new ArrayList();
         
-        for(int i = 0;i<bottles;i++) {
+        for(int i = 0;i<=bottles;i++) {
             bottle_array.add(new Bottle());
         }
     }

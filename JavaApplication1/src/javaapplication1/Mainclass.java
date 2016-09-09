@@ -25,12 +25,13 @@ class Mainclass{
     }
     
     boolean Menu(){
-        System.out.println("\n*** LIMSA-AUTOMAATTI ***\n" +
-"1) Lisää rahaa koneeseen\n" +
-"2) Osta pullo\n" +
-"3) Ota rahat ulos\n" +
-"4) Listaa koneessa olevat pullot\n" +
-"0) Lopeta");
+        System.out.println(
+                "\n*** LIMSA-AUTOMAATTI ***\n" +
+                "1) Lisää rahaa koneeseen\n" +
+                "2) Osta pullo\n" +
+                "3) Ota rahat ulos\n" +
+                "4) Listaa koneessa olevat pullot\n" +
+                "0) Lopeta");
         System.out.print("Valintasi: ");
         Scanner scanner = new Scanner(System.in);
         int choice = scanner.nextInt();
@@ -40,7 +41,7 @@ class Mainclass{
                 disp.addMoney();
                 break;
             case 2:
-                disp.buyBottle();
+                BuyBottle();
                 break;
             case 3:
                 disp.returnMoney();
@@ -55,6 +56,14 @@ class Mainclass{
         return false;
     }
     
+    void BuyBottle(){
+        ListBottles();
+        System.out.print("Valintasi: ");
+        Scanner scanner = new Scanner(System.in);
+        int choice = scanner.nextInt();
+        disp.buyBottle(choice - 1);
+    }
+    
     void ListBottles(){
         Bottle b;
         for(int i = 0; i < disp.bottle_array.size(); i++){
@@ -67,18 +76,19 @@ class Mainclass{
 
 class BottleDispenser {
     
-    private int bottles;
-    private int money;
+    private float money;
     public  ArrayList bottle_array;
     
     public BottleDispenser() {
-        bottles = 5;
         money = 0;
         bottle_array = new ArrayList();
         
-        for(int i = 0;i<=bottles;i++) {
-            bottle_array.add(new Bottle());
-        }
+        bottle_array.add(new Bottle("Pepsi Max", 0.5f, 1.8f));
+        bottle_array.add(new Bottle("Pepsi Max", 1.5f, 2.2f));
+        bottle_array.add(new Bottle("Coca-Cola Zero", 0.5f, 2.0f));
+        bottle_array.add(new Bottle("Coca-Cola Zero", 1.5f, 2.5f));
+        bottle_array.add(new Bottle("Fanta Zero", 0.5f, 1.95f));
+        bottle_array.add(new Bottle("Fanta Zero", 0.5f, 1.95f));
     }
     
     public void addMoney() {
@@ -86,9 +96,9 @@ class BottleDispenser {
         System.out.println("Klink! Lisää rahaa laitteeseen!");
     }
     
-    public void buyBottle() {
-        Bottle bottle = (Bottle)bottle_array.get(0);
-        if(bottles < 1){
+    public void buyBottle(int loc) {
+        Bottle bottle = (Bottle)bottle_array.get(loc);
+        if(bottle_array.size() < 1){
             System.out.println("Masiina tyhjä!");
             return;
         }else if(money < bottle.price){
@@ -96,26 +106,27 @@ class BottleDispenser {
             return;
         }
         
-        bottles -= 1;
         System.out.println("KACHUNK! " + bottle.name + " tipahti masiinasta!");
         money -= bottle.price;
-        bottle_array.remove(0);
+        bottle_array.remove(loc);
     }
     
     public void returnMoney() {
+        
+        System.out.println("Klink klink. Sinne menivät rahat! Rahaa tuli ulos " + String.format("%.2f", money) + "€");
         money = 0;
-        System.out.println("Klink klink. Sinne menivät rahat!");
     }
 }
 
 class Bottle{
     public String name = "Pepsi Max";
-    public String type = "Pepsi";
     public float size = 0.5f;
     public float price = 1.80f;
     
-    public Bottle(){
-        
+    public Bottle(String n, float s, float p){
+        name = n;
+        size = s;
+        price = p;
     }
     
 }

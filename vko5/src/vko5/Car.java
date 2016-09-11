@@ -7,7 +7,7 @@ package vko5;
 
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  *
@@ -27,7 +27,7 @@ public class Car {
         parts.add(new Wheel());
         parts.add(new Wheel());
         parts.add(new Wheel());
-        partsInCar = new HashMap<>();
+        partsInCar = new TreeMap<String, Integer>();
     }
     
     public void print(){
@@ -42,6 +42,7 @@ public class Car {
             }
         }
         
+        
         System.out.println("Autoon kuuluu:");
         for(Map.Entry<String, Integer> entry : partsInCar.entrySet()){
             System.out.print("\t");
@@ -54,33 +55,34 @@ public class Car {
 }
 
 class CarPart{
-    String name;
+    String name = "";
+    
 }
 
 class Body extends CarPart{
     Body(){
         name = "Body";
-        System.out.println("Valmistetaan " + name);
+        System.out.println("Valmistetaan: " + name);
     }
 }
 
 class Chassis extends CarPart{
     Chassis(){
         name = "Chassis";
-        System.out.println("Valmistetaan " + name);
+        System.out.println("Valmistetaan: " + name);
     }
 }
 
 class Engine extends CarPart{
     Engine(){
         name = "Engine";
-        System.out.println("Valmistetaan " + name);
+        System.out.println("Valmistetaan: " + name);
     }
 }
 
 class Wheel extends CarPart{
     Wheel(){
         name = "Wheel";
-        System.out.println("Valmistetaan " + name);
+        System.out.println("Valmistetaan: " + name);
     }
 }

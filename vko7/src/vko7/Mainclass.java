@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package vko7;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,7 +28,7 @@ public class Mainclass {
 
     boolean Menu(){
         System.out.println(
-                "\n*** PANKKIAUTOMAATTI ***\n" +
+                "\n*** PANKKIJÄRJESTELMÄ ***\n" +
                 "1) Lisää tavallinen tili\n" +
                 "2) Lisää luotollinen tili\n" +
                 "3) Tallenna tilille rahaa\n" +
@@ -68,6 +63,8 @@ public class Mainclass {
             case 7:
                 PrintAllAccounts();
                 break;
+            case 0:
+                return true;
             default:
                 System.out.println("Valinta ei kelpaa.");
                 break;
@@ -86,6 +83,8 @@ public class Mainclass {
             System.out.print("Syötä rahamäärä: ");
             int amount = Integer.parseInt(in.readLine());
             
+            int limit = 0;
+            
             switch(type){
                 case 0:
                 default:
@@ -93,9 +92,14 @@ public class Mainclass {
                     break;
                 case 1:
                     System.out.print("Syötä luottoraja: ");
-                    int limit = Integer.parseInt(in.readLine());
+                    limit = Integer.parseInt(in.readLine());
+                    accounts.add(new CreditAccount(num, amount, limit));
                     break;
             }
+            
+            /*System.out.println("Tilinumero: " + num);
+            System.out.println("Rahamäärä: " + amount);
+            if(limit > 0) System.out.println("Luottoraja: " + limit);*/
         
             
             
@@ -117,9 +121,12 @@ public class Mainclass {
             
             System.out.print("Syötä rahamäärä: ");
             int amount = Integer.parseInt(in.readLine());
-            account.AddMoney(amount);
+            
             System.out.println("Tilinumero: " + account.number);
             System.out.println("Rahamäärä: " + amount);
+            
+            if(account != null)
+            account.AddMoney(amount);
             
         } catch (IOException ex) {
             Logger.getLogger(Mainclass.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,13 +137,13 @@ public class Mainclass {
         
         try{
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-            System.out.print("Valitse poistettava tilinumero: ");
+            System.out.print("Syötä poistettava tilinumero: ");
             String num = in.readLine();
             Account account = FindAccountInList(num);
             
+            System.out.println("Tilinumero: " + num);
             if(account != null){
                 accounts.remove(account);
-                System.out.println("Tilinumero: " + num);
             }
             
         } catch (IOException ex) {
@@ -152,14 +159,13 @@ public class Mainclass {
             String num = in.readLine();
             Account account = FindAccountInList(num);
             
-            if(account == null) return;
-            
             System.out.print("Syötä rahamäärä: ");
             int amount = Integer.parseInt(in.readLine());
             
-            account.TakeMoney(amount);
-            System.out.println("Tilinumero: " + account.number);
+            System.out.println("Tilinumero: " + num);
             System.out.println("Rahamäärä: " + amount);
+            
+            if(account != null) account.TakeMoney(amount);
             
         } catch (IOException ex) {
             Logger.getLogger(Mainclass.class.getName()).log(Level.SEVERE, null, ex);
@@ -171,13 +177,7 @@ public class Mainclass {
             BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
             System.out.print("Syötä tulostettava tilinumero: ");
             String num = in.readLine();
-            Account account = FindAccountInList(num);
-            
-            if(account == null) return;
-            
-            System.out.println("Tilinumero: " + account.number);
-            System.out.println("Rahamäärä: " + account.money);
-            if(account.creditLimit > 0) System.out.println("Luottoraja: " + account.creditLimit);
+            PrintOneAccount(num);
             
             
         } catch (IOException ex) {
@@ -185,8 +185,22 @@ public class Mainclass {
         }
     }
     
+    void PrintOneAccount(String num){
+        Account account = FindAccountInList(num);
+        
+        if(account == null) return;
+        System.out.println("Tilinumero: " + account.number);
+        /*System.out.println("Rahamäärä: " + account.money);
+        if(account.creditLimit > 0) System.out.println("Luottoraja: " + account.creditLimit);*/
+        
+    }
+    
     void PrintAllAccounts(){
-        //TODO: this function
+        System.out.println("Tulostaa kaiken");
+        /*for(Object o : accounts){
+            Account a = (Account) o;
+            PrintOneAccount(a.number);
+        }*/
     }
     
     Account FindAccountInList(String num){
@@ -202,10 +216,10 @@ public class Mainclass {
         }
         
         //never found it
-        if(account == null){
+        /*if(account == null){
             System.out.print("Tiliä ei löytynyt.");
             return null;
-        }
+        }*/
         
         return account;
     }

@@ -29,7 +29,7 @@ public class Account{
     void Print(){
         
         if(creditLimit > 0){
-            System.out.println("Tilinumero: " + number + " Tilillä rahaa: " + money + "Luottoraja: " + creditLimit);
+            System.out.println("Tilinumero: " + number + " Tilillä rahaa: " + money + " Luottoraja: " + creditLimit);
         }else{
             System.out.println("Tilinumero: " + number + " Tilillä rahaa: " + money);
         }

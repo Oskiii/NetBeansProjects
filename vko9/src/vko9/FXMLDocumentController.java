@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -42,20 +43,31 @@ public class FXMLDocumentController implements Initializable {
     private ComboBox<String> bottleTypeDropdown;
     @FXML
     private ComboBox<Float> bottleSizeDropdown;
+    @FXML
+    private Button saveReceiptButton;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
       
         //initialize bottletype dropdown
+        addBottles();
+        
+    }
+
+    private void addBottles(){
         for (Object b : BottleDispenser.getInstance().bottle_array) {
             Bottle bottle = (Bottle)b;
             addBottleToDropdowns(bottle);
         }
-        
-    }    
+    }
 
     @FXML
     private void addMoneyButtonAction(ActionEvent event) {
+        if((float)addMoneyAmountSlider.getValue() <= 0){
+            printToField("Valitse rahamäärä!");
+            return;
+        }
+        
         BottleDispenser.getInstance().addMoney((float)addMoneyAmountSlider.getValue());
         addMoneyAmountSlider.setValue(0);
     }
@@ -63,15 +75,20 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void buyBottleButtonAction(ActionEvent event) {
         
-        BottleDispenser.getInstance().buyBottle(
-                BottleDispenser.getInstance().GetBottleID(
+        int ID = BottleDispenser.getInstance().GetBottleID(
                         new Bottle(
                                 bottleTypeDropdown.valueProperty().getValue(), 
                                 bottleSizeDropdown.valueProperty().getValue(),
                                 0f
                         )
-                )
-        );
+                );
+        BottleDispenser.getInstance().buyBottle(ID);
+        
+        BottleDispenser.getInstance().SetLastPurchase((Bottle)BottleDispenser.getInstance().bottle_array.get(ID));
+        
+        bottleTypeDropdown.getItems().clear();
+        bottleSizeDropdown.getItems().clear();
+        addBottles();
     }
    
     public void addBottleToDropdowns(Bottle b){
@@ -79,8 +96,29 @@ public class FXMLDocumentController implements Initializable {
             bottleTypeDropdown.getItems().add(b.name);
         }
         
-        if(!bottleSizeDropdown.getItems().contains(b.size)){
+        /*if(!bottleSizeDropdown.getItems().contains(b.size)){
             bottleSizeDropdown.getItems().add(b.size);
+        }*/
+    }
+   
+    private void addSizestoDropdown(String bottleName){
+        ArrayList sizes = BottleDispenser.getInstance().GetBottleSizes(bottleName);
+        for(Object s : sizes){
+            bottleSizeDropdown.getItems().add((float) s);
         }
+        
+    }
+
+    @FXML
+    private void dropdownClosedAction(Event event) {
+        bottleSizeDropdown.getItems().clear();
+        addBottles();
+        addSizestoDropdown(bottleTypeDropdown.valueProperty().getValue());
+    }
+
+    @FXML
+    private void saveReceiptButtonAction(ActionEvent event) {
+        
+        BottleDispenser.getInstance().WriteReceipt();
     }
 }

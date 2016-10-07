@@ -5,6 +5,10 @@
  */
 package vko9;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -17,6 +21,7 @@ public class BottleDispenser {
     
     private float money;
     public  ArrayList bottle_array;
+    private static Bottle lastPurchase;
     
     public static BottleDispenser getInstance(){
         if(instance == null){
@@ -34,13 +39,13 @@ public class BottleDispenser {
         bottle_array.add(new Bottle("Coca-Cola Zero", 0.5f, 2.0f));
         bottle_array.add(new Bottle("Coca-Cola Zero", 1.5f, 2.5f));
         bottle_array.add(new Bottle("Fanta Zero", 0.5f, 1.95f));
-        bottle_array.add(new Bottle("Fanta Zero", 0.5f, 1.95f));
+        bottle_array.add(new Bottle("Fanta Zero", 1.5f, 1.95f));
         
     }
     
     public void addMoney(float amount) {
         money += amount;
-        FXMLDocumentController.printToField("Klink! Lisää rahaa laitteeseen!");
+        FXMLDocumentController.printToField(String.format("Klink! Laitteessa on nyt %.2f€", money));
     }
     
     public void buyBottle(int loc) {
@@ -50,7 +55,7 @@ public class BottleDispenser {
             return;
         }
         
-        if(loc <= 0){
+        if(loc < 0){
             FXMLDocumentController.printToField("Tuotetta ei ole jäljellä!");
             return;
         }
@@ -79,18 +84,19 @@ public class BottleDispenser {
             System.out.println(bottle.name + " " + bottle.size);
             System.out.println("5" + bottleToFind.name + " " + bottleToFind.size);
             if(bottle.name.equals(bottleToFind.name) && bottle.size == bottleToFind.size){
+                System.out.println("bottleid: " + i);
                 return i;
             }
         }
         return -1;
     }
     
-    public ArrayList GetBottleSizes(Bottle bottleToFind){
+    public ArrayList GetBottleSizes(String bottleToFind){
         ArrayList foundSizes = new ArrayList();
         
         for(int i = 0; i < bottle_array.size(); i++){
             Bottle bottle = (Bottle)bottle_array.get(i);
-            if(bottle.name.equals(bottleToFind.name)){
+            if(bottle.name.equals(bottleToFind)){
                 foundSizes.add(bottle.size);
             }
         }
@@ -103,6 +109,38 @@ public class BottleDispenser {
             b = (Bottle)bottle_array.get(i);
             FXMLDocumentController.printToField((i+1) + ". Nimi: " + b.name);
             FXMLDocumentController.printToField("\tKoko: " + b.size + "\tHinta: " + b.price);
+        }
+    }
+    
+    public void SetLastPurchase(Bottle b){
+        lastPurchase = b;
+    }
+    
+    public void WriteReceipt(){
+        if(lastPurchase == null){
+            FXMLDocumentController.printToField("Osta ensin jotain!");
+            return;
+        }
+        
+        String location = System.getProperty( "user.dir" ) + "/receipt.txt";
+        DecimalFormat format = new DecimalFormat("0.#");
+        
+        try{
+            BufferedWriter out = new BufferedWriter(new FileWriter( location));
+            String c;
+            
+            out.write("KUITTI\r\n");
+            out.write(lastPurchase.name);
+            
+            out.write(" " + format.format(lastPurchase.size) + "l");
+            out.write("\t" + format.format(lastPurchase.price) + "€");
+            
+            out.close();
+            
+            FXMLDocumentController.printToField("Receipt saved to " + location);
+            
+        }catch(IOException ex){
+            System.out.println("File not found!");
         }
     }
     

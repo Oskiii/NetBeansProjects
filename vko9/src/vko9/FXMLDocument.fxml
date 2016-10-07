@@ -6,13 +6,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="320" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="vko9.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="399.0" prefWidth="320" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vko9.FXMLDocumentController">
     <children>
         <Button fx:id="addMoneyButton" layoutX="165.0" layoutY="360.0" onAction="#addMoneyButtonAction" prefHeight="25.0" prefWidth="140.0" text="Add Money" />
       <Button fx:id="buyBottleButton" layoutX="235.0" layoutY="168.0" onAction="#buyBottleButtonAction" text="Buy Bottle" />
       <TextArea fx:id="outputText" editable="false" layoutX="14.0" layoutY="14.0" maxHeight="192.0" prefHeight="135.0" prefWidth="286.0" wrapText="true" />
-      <Slider fx:id="addMoneyAmountSlider" layoutX="19.0" layoutY="327.0" majorTickUnit="0.2" max="2.0" minorTickCount="20" prefHeight="33.0" prefWidth="286.0" showTickLabels="true" />
-      <ComboBox fx:id="bottleTypeDropdown" layoutX="19.0" layoutY="200.0" prefHeight="25.0" prefWidth="171.0" />
-      <ComboBox fx:id="bottleSizeDropdown" layoutX="192.0" layoutY="200.0" prefHeight="25.0" prefWidth="113.0" />
+      <Slider fx:id="addMoneyAmountSlider" blockIncrement="0.05" layoutX="17.0" layoutY="318.0" majorTickUnit="0.1" max="2.0" minorTickCount="1" prefHeight="33.0" prefWidth="286.0" showTickLabels="true" snapToTicks="true" />
+      <ComboBox fx:id="bottleTypeDropdown" layoutX="19.0" layoutY="200.0" onHidden="#dropdownClosedAction" prefHeight="25.0" prefWidth="171.0" promptText="Drink Type" />
+      <ComboBox fx:id="bottleSizeDropdown" layoutX="192.0" layoutY="200.0" prefHeight="25.0" prefWidth="113.0" promptText="Bottle Size" />
+      <Button fx:id="saveReceiptButton" layoutX="14.0" layoutY="360.0" onAction="#saveReceiptButtonAction" prefHeight="25.0" prefWidth="140.0" text="Save Receipt" />
     </children>
 </AnchorPane>

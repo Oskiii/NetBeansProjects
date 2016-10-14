@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="327.0" prefWidth="350.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="vko10.FXMLDocumentController">
+    <children>
+        <Button fx:id="listMoviesButton" layoutX="53.0" layoutY="151.0" onAction="#listMoviesButtonAction" text="Listaa elokuvat" />
+      <ComboBox fx:id="theatresCombo" layoutX="14.0" layoutY="55.0" prefWidth="150.0" />
+      <Text layoutX="14.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Valitse teatteri:" />
+      <TextField fx:id="showDateField" layoutX="181.0" layoutY="55.0" promptText="Esityspäivä" />
+      <TextField fx:id="endTimeField" layoutX="181.0" layoutY="108.0" promptText="Päättymisaika" />
+      <Text layoutX="14.0" layoutY="104.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Alkamisväli:" />
+      <TextField fx:id="startTimeField" layoutX="15.0" layoutY="108.0" promptText="Alkamisaika" />
+      <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Finnkinon elokuvat">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Text layoutX="14.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tai hae elokuvan nimellä:" />
+      <TextField fx:id="movieNameField" layoutX="156.0" layoutY="184.0" prefHeight="25.0" prefWidth="103.0" promptText="Anna elokuvan nimi" />
+      <Button fx:id="nameSearchButton" layoutX="264.0" layoutY="184.0" onAction="#nameSearchButtonAction" prefHeight="25.0" prefWidth="72.0" text="Nimihaku" />
+      <TextArea layoutY="213.0" prefHeight="195.0" prefWidth="350.0" />
+    </children>
+</AnchorPane>

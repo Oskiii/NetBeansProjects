@@ -5,18 +5,32 @@
  */
 package vko10;
 
+import java.util.Date;
+
 /**
  *
  * @author Oski
  */
 public class Showing {
     private String title;
+    private Date startTime;
+    private Date endTime;
 
-    public Showing(String name){
+    public Showing(String name, Date start, Date end){
         title = name;
+        startTime = start;
+        endTime = end;
     }
     
     public String GetTitle(){
         return title;
+    }
+    
+    public Date GetStartTime(){
+        return startTime;
+    }
+    
+    public Date GetEndTime(){
+        return endTime;
     }
 }

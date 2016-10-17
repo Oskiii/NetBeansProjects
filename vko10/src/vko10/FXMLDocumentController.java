@@ -10,7 +10,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,13 +72,24 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void listMoviesButtonAction(ActionEvent event) {
         listView.getItems().clear();
-        int ID = MovieCompany.GetInstance().GetTheatreByName(theatresCombo.getSelectionModel().getSelectedItem()).GetID();
-        ArrayList<Showing> movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID);
+        int ID = MovieCompany.GetInstance().GetTheatreByID(theatresCombo.getSelectionModel().getSelectedIndex()).GetID();
+        SimpleDateFormat ftDate = new SimpleDateFormat("dd.MM.yyyy");
+        SimpleDateFormat ftTime = new SimpleDateFormat("hh:mm");
         
-        for(Showing s : movies){
-            listView.getItems().add(s.GetTitle());
+        ArrayList<Showing> movies;
+        try {
+
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, ftDate.parse(showDateField.getText()));
+            
+        } catch (ParseException ex) {
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, new Date());
         }
         
+        for(Showing s : movies){
+                listView.getItems().add(s.GetTitle());
+            }
+
+        //theatresCombo.getSelectionModel()
     }
 
     @FXML

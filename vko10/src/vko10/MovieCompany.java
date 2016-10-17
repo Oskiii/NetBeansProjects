@@ -9,6 +9,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -61,6 +62,10 @@ public class MovieCompany {
         }
         return null;
     }
+    
+    public Theatre GetTheatreByID(int ID){
+        return theatres.get(ID);
+    }
 
     private ArrayList ParseTheatreData(String content) throws ParserConfigurationException, SAXException, IOException{
         NodeList theatreList;
@@ -74,7 +79,7 @@ public class MovieCompany {
         document = documentBuilder.parse(new InputSource(new ByteArrayInputStream(content.getBytes("utf-8"))));
         document.getDocumentElement().normalize();
 
-        System.out.println("Root element :" + document.getDocumentElement().getNodeName());
+        //System.out.println("Root element :" + document.getDocumentElement().getNodeName());
         
         theatreList = document.getElementsByTagName("TheatreArea");
         
@@ -83,13 +88,13 @@ public class MovieCompany {
         for(int i = 1; i < theatreList.getLength(); i++){
             Node theatreNode = theatreList.item(i);
             
-            System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
+            //System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
             
             Element element = (Element) theatreNode;
 
             //System.out.println(theatreNode.getAttributes().item(0).getTextContent());
-            System.out.println("Name: " + element.getElementsByTagName("Name").item(0).getTextContent());
-            System.out.println("ID: " + element.getElementsByTagName("ID").item(0).getTextContent());
+            //System.out.println("Name: " + element.getElementsByTagName("Name").item(0).getTextContent());
+            //System.out.println("ID: " + element.getElementsByTagName("ID").item(0).getTextContent());
 
             name = element.getElementsByTagName("Name").item(0).getTextContent();
             ID = Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent());
@@ -99,15 +104,18 @@ public class MovieCompany {
         return tList;
     }
 
-    public ArrayList<Showing> GetShowsAtTheatreForDay(int theatreID/*, Date date*/){
+    public ArrayList<Showing> GetShowsAtTheatreForDay(int theatreID, Date date){
         NodeList showList;
         ArrayList sList = new ArrayList();
         
         System.out.println(theatreID);
         
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        String sdate = ft.format(date);
+        
         String content = null;
         try {
-            content = URLReader.ReadURL("http://www.finnkino.fi/xml/Schedule/?area=" + theatreID + "&dt=" + "17.10.2016");
+            content = URLReader.ReadURL("http://www.finnkino.fi/xml/Schedule/?area=" + theatreID + "&dt=" + sdate);
         } catch (IOException ex) {
             Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -130,32 +138,43 @@ public class MovieCompany {
 
         document.getDocumentElement().normalize();
 
-        System.out.println("Root element: " + document.getDocumentElement().getNodeName());
+        //System.out.println("Root element: " + document.getDocumentElement().getNodeName());
         
         Node showParent = document.getDocumentElement().getElementsByTagName("Shows").item(0);
-        System.out.println(showParent.getNodeName());
+        //System.out.println(showParent.getNodeName());
 
         Element showParentElement = (Element) showParent;
-        System.out.println("lapsia " + showParentElement.getElementsByTagName("Show").getLength());
+        //System.out.println("lapsia " + showParentElement.getElementsByTagName("Show").getLength());
         showList = showParentElement.getElementsByTagName("Show");
+        
+        
+        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        Date showStartDate = null;
+        Date showEndDate = null;
         
         String name = "";
         int ID = 0;
-        System.out.println("entering for loop!");
-        System.out.println(showList.getLength());
+        //System.out.println("entering for loop!");
+        //System.out.println(showList.getLength());
         for(int i = 1; i < showList.getLength(); i++){
-            System.out.println("loopdy loop!");
+            //System.out.println("loopdy loop!");
             Node theatreNode = showList.item(i);
             
-            System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
+            //System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
             
             Element element = (Element) theatreNode;
 
-            System.out.println("Title: " + element.getElementsByTagName("Title").item(0).getTextContent());
+            //System.out.println("Title: " + element.getElementsByTagName("Title").item(0).getTextContent());
             
             name = element.getElementsByTagName("Title").item(0).getTextContent();
+            try {
+                showStartDate = XMLDate.parse(element.getElementsByTagName("dttmShowStart").item(0).getTextContent());
+                showEndDate = XMLDate.parse(element.getElementsByTagName("dttmShowEnd").item(0).getTextContent());
+            } catch (ParseException ex) {
+                Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+            }
             //ID = Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent());
-            sList.add(new Showing(name));
+            sList.add(new Showing(name, showStartDate, showEndDate));
         }
         
         return sList;

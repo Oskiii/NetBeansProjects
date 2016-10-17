@@ -25,4 +25,9 @@ public class Theatre {
     public int GetID(){
         return ID;
     }
+    
+    @Override
+    public String toString(){
+        return name;
+    }
 }

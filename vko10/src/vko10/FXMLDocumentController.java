@@ -47,7 +47,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button nameSearchButton;
     @FXML
-    private ListView<?> listView;
+    private ListView<String> listView;
 
     
     private void handleButtonAction(ActionEvent event) {
@@ -59,11 +59,7 @@ public class FXMLDocumentController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         ArrayList<Theatre> theatres = new ArrayList<>();
 
-        try {
-            theatres = MovieCompany.GetInstance().GetTheaters("http://www.finnkino.fi/xml/TheatreAreas/");
-        } catch (IOException | SAXException | ParserConfigurationException ex) {
-            Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        theatres = MovieCompany.GetInstance().GetTheaters();
 
         for(Theatre t : theatres){
             addTheaterToCombo(t);
@@ -72,6 +68,14 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void listMoviesButtonAction(ActionEvent event) {
+        listView.getItems().clear();
+        int ID = MovieCompany.GetInstance().GetTheatreByName(theatresCombo.getSelectionModel().getSelectedItem()).GetID();
+        ArrayList<Showing> movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID);
+        
+        for(Showing s : movies){
+            listView.getItems().add(s.GetTitle());
+        }
+        
     }
 
     @FXML

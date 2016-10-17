@@ -21,4 +21,8 @@ public class Theatre {
     public String GetName(){
         return name;
     }
+    
+    public int GetID(){
+        return ID;
+    }
 }

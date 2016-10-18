@@ -19,6 +19,7 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.beans.property.DoubleProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -53,12 +54,8 @@ public class FXMLDocumentController implements Initializable {
     private Button nameSearchButton;
     @FXML
     private ListView<String> listView;
-
-    
-    private void handleButtonAction(ActionEvent event) {
-        System.out.println("You clicked me!");
-        label.setText("Hello World!");
-    }
+    @FXML
+    private TextField movieNameTextField;
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -73,8 +70,10 @@ public class FXMLDocumentController implements Initializable {
 
     @FXML
     private void listMoviesButtonAction(ActionEvent event) {
+        showText("Ladataan...");
+        
         listView.getItems().clear();
-        int ID = MovieCompany.GetInstance().GetTheatreByID(theatresCombo.getSelectionModel().getSelectedIndex()).GetID();
+        int ID = MovieCompany.GetInstance().GetTheatreByListPosition(theatresCombo.getSelectionModel().getSelectedIndex()).GetID();
         SimpleDateFormat ftDate = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat ftTime = new SimpleDateFormat("HH:mm");
         SimpleDateFormat ftDateTime = new SimpleDateFormat("dd.MM.yyyy'T'HH:mm");
@@ -143,11 +142,39 @@ public class FXMLDocumentController implements Initializable {
                 listView.getItems().add(s.GetTitle() + " " + ftTime.format(s.GetStartTime()));
             }
 
-        //theatresCombo.getSelectionModel()
+        showText(null);
     }
 
     @FXML
     private void nameSearchButtonAction(ActionEvent event) {
+        if(movieNameField.getText().isEmpty()) return;
+        
+        ArrayList<Showing> shows = MovieCompany.GetInstance().GetShowingsInfoByMovieName(movieNameField.getText());
+        showText(movieNameField.getText());
+        
+        SimpleDateFormat dayFormat = new SimpleDateFormat("dd.MM");
+        SimpleDateFormat timeFormat = new SimpleDateFormat("HH.mm");
+        
+        listView.getItems().clear();
+        for(Showing s : shows){
+            listView.getItems().add(s.GetTheatre().GetName() + ": " + dayFormat.format(s.GetStartTime()) + ": " + timeFormat.format(s.GetStartTime()) + "-" + timeFormat.format(s.GetEndTime()));
+        }
+    }
+    
+    private void showText(String text){
+        if(text == null){
+            movieNameTextField.setScaleY(0);
+        }else{
+            movieNameTextField.setScaleY(1);
+            movieNameTextField.setStyle(""
+            + "-fx-font-size: 16px;"
+            + "-fx-font-style: normal;"
+            + "-fx-font-weight: bold;"
+            + "-fx-font-family: Times New Roman;"
+            + "-fx-text-fill: black;"
+            + "-fx-background-color: white");
+            movieNameTextField.setText(text);
+        }
     }
     
     private void addTheaterToCombo(Theatre t){
@@ -165,9 +192,5 @@ public class FXMLDocumentController implements Initializable {
             content += line + "\n";
         }
         return content;
-    }
-    
-    private void listMovies(){
-        //String URL = "http://www.finnkino.fi/xml/Schedule/?area=" + theatreID + "&dt=" + date;
     }
 }

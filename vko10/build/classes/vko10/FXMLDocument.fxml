@@ -7,7 +7,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="384.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vko10.FXMLDocumentController">
+<AnchorPane id="AnchorPane" prefHeight="547.0" prefWidth="480.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="vko10.FXMLDocumentController">
     <children>
         <Button fx:id="listMoviesButton" layoutX="371.0" layoutY="121.0" onAction="#listMoviesButtonAction" text="Listaa elokuvat" />
       <ComboBox fx:id="theatresCombo" layoutX="14.0" layoutY="66.0" prefHeight="25.0" prefWidth="222.0" />
@@ -24,6 +24,8 @@
       <Text layoutX="14.0" layoutY="175.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tai hae elokuvan nimellä:" />
       <TextField fx:id="movieNameField" layoutX="156.0" layoutY="158.0" prefHeight="25.0" prefWidth="230.0" promptText="Anna elokuvan nimi" />
       <Button fx:id="nameSearchButton" layoutX="394.0" layoutY="158.0" onAction="#nameSearchButtonAction" prefHeight="25.0" prefWidth="72.0" text="Nimihaku" />
-      <ListView fx:id="listView" layoutY="194.0" prefHeight="272.0" prefWidth="480.0" />
+      <ListView fx:id="listView" layoutY="219.0" prefHeight="326.0" prefWidth="480.0" />
+      <TextField fx:id="movieNameTextField" alignment="CENTER" editable="false" layoutX="-1.0" layoutY="194.0" prefHeight="25.0" prefWidth="480.0" scaleY="0.0">
+      </TextField>
     </children>
 </AnchorPane>

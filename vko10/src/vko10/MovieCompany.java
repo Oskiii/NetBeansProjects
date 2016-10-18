@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -64,8 +65,19 @@ public class MovieCompany {
     }
     
     public Theatre GetTheatreByID(int ID){
-        return theatres.get(ID);
+        for(int i = 0; i < theatres.size (); i++){
+            if(theatres.get(i).GetID() == ID){
+                return theatres.get(i);
+            }
+        }
+        return null;
     }
+    
+    public Theatre GetTheatreByListPosition(int pos){
+        return theatres.get(pos);
+    }
+    
+    
 
     private ArrayList ParseTheatreData(String content) throws ParserConfigurationException, SAXException, IOException{
         NodeList theatreList;
@@ -175,7 +187,7 @@ public class MovieCompany {
             }
             
             if(showStartDate.after(startTime) && showEndDate.before(endTime)){
-                sList.add(new Showing(name, showStartDate, showEndDate));
+                sList.add(new Showing(name, GetTheatreByID(theatreID), showStartDate, showEndDate));
             }
         }
         
@@ -252,18 +264,50 @@ public class MovieCompany {
             }
             
             if(showStartDate.after(startTime) && showStartDate.before(endTime)){
-                sList.add(new Showing(name, showStartDate, showEndDate));
+                sList.add(new Showing(name, GetTheatreByID(theatreID), showStartDate, showEndDate));
             }
         }
         
         return sList;
     }
     
+    public ArrayList<Showing> GetShowingsInfoByMovieName(String movieName){
+        int dateCounter;
+        int showCounter;
+        int daysIntoFuture = 0;
+        Calendar c = Calendar.getInstance();
+        
+        ArrayList<Showing> showingList = new ArrayList<>();
+        
+        //loop through next 30 days
+        for(dateCounter = 0; dateCounter < daysIntoFuture + 1; dateCounter++){
+
+            c.setTime(new Date());
+            c.add(Calendar.DATE, dateCounter);  // number of days to add
+            
+            System.out.println("looking at date: " + c.getTime());
+            //loop through all theatres
+            for(Theatre t : theatres){
+                ArrayList<Showing> showsAtTheatre = GetShowsAtTheatreForDay(t.GetID(), c.getTime());
+                
+                System.out.println("looking at theatre: " + t.GetName());
+                //loop through all shows at theatre
+                for(showCounter = 0; showCounter < showsAtTheatre.size(); showCounter++){
+                    System.out.println("looking at show: " + showsAtTheatre.get(showCounter));
+                    if(showsAtTheatre.get(showCounter).GetTitle().equals(movieName)){
+                        showingList.add(showsAtTheatre.get(showCounter));
+                    }
+                }
+            }
+        }
+        return showingList;
+    }
+    
     public ArrayList<Showing> GetShowsAtTheatreForDay(int theatreID, Date date){
         NodeList showList;
         ArrayList sList = new ArrayList();
         
-        System.out.println(theatreID);
+        //System.out.println(theatreID);
         
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
         String sdate = ft.format(date);
@@ -329,7 +373,7 @@ public class MovieCompany {
                 Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
             }
 
-            sList.add(new Showing(name, showStartDate, showEndDate));
+            sList.add(new Showing(name, GetTheatreByID(theatreID), showStartDate, showEndDate));
         }
         
         return sList;

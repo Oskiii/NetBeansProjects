@@ -13,11 +13,14 @@ import java.util.Date;
  */
 public class Showing {
     private String title;
+    private Theatre theatre;
+    private Date showDay;
     private Date startTime;
     private Date endTime;
 
-    public Showing(String name, Date start, Date end){
+    public Showing(String name, Theatre t, Date start, Date end){
         title = name;
+        theatre = t;
         startTime = start;
         endTime = end;
     }
@@ -32,5 +35,9 @@ public class Showing {
     
     public Date GetEndTime(){
         return endTime;
+    }
+    
+    public Theatre GetTheatre(){
+        return theatre;
     }
 }

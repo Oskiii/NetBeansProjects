@@ -13,7 +13,9 @@ import java.net.URL;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -74,19 +76,50 @@ public class FXMLDocumentController implements Initializable {
         listView.getItems().clear();
         int ID = MovieCompany.GetInstance().GetTheatreByID(theatresCombo.getSelectionModel().getSelectedIndex()).GetID();
         SimpleDateFormat ftDate = new SimpleDateFormat("dd.MM.yyyy");
-        SimpleDateFormat ftTime = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat ftTime = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat ftDateTime = new SimpleDateFormat("dd.MM.yyyy'T'HH:mm");
         
-        ArrayList<Showing> movies;
+        
+        
+        ArrayList<Showing> movies = null;
         try {
+            // Construct date and time objects
+            Calendar dateCal = Calendar.getInstance();
+            Calendar timeCal = Calendar.getInstance();
 
-            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, ftDate.parse(showDateField.getText()));
+            dateCal.setTime(ftDate.parse(showDateField.getText()));
+            timeCal.setTime(ftTime.parse(startTimeField.getText()));
+
+
+            // Extract the time of the "time" object to the "date"
+            dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+            dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+            dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+
+            // Get the time value!
+            Date startDate = dateCal.getTime();
+
+            timeCal.setTime(ftTime.parse(endTimeField.getText()));
+
+            // Extract the time of the "time" object to the "date"
+            dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+            dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+            dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+
+            // Get the time value!
+            Date endDate = dateCal.getTime();
+
+            Date date = ftDate.parse(showDateField.getText());
+
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDayThatStartBetweenTimes(ID, date, startDate, endDate);
             
         } catch (ParseException ex) {
+            //Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
             movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, new Date());
         }
         
         for(Showing s : movies){
-                listView.getItems().add(s.GetTitle());
+                listView.getItems().add(s.GetTitle() + " " + ftTime.format(s.GetStartTime()));
             }
 
         //theatresCombo.getSelectionModel()

@@ -104,6 +104,161 @@ public class MovieCompany {
         return tList;
     }
 
+    public ArrayList<Showing> GetShowsAtTheatreForDayThatRunBetweenTimes(int theatreID, Date date, Date startTime, Date endTime){
+        NodeList showList;
+        ArrayList sList = new ArrayList();
+        
+        System.out.println(theatreID);
+        
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        String sdate = ft.format(date);
+        
+        String content = null;
+        try {
+            content = URLReader.ReadURL("http://www.finnkino.fi/xml/Schedule/?area=" + theatreID + "&dt=" + sdate);
+        } catch (IOException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        Document document = null;
+
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            document = documentBuilder.parse(new InputSource(new ByteArrayInputStream(content.getBytes("utf-8"))));
+        } catch (SAXException | IOException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        document.getDocumentElement().normalize();
+
+        //System.out.println("Root element: " + document.getDocumentElement().getNodeName());
+        
+        Node showParent = document.getDocumentElement().getElementsByTagName("Shows").item(0);
+        //System.out.println(showParent.getNodeName());
+
+        Element showParentElement = (Element) showParent;
+        //System.out.println("lapsia " + showParentElement.getElementsByTagName("Show").getLength());
+        showList = showParentElement.getElementsByTagName("Show");
+        
+        
+        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        Date showStartDate = null;
+        Date showEndDate = null;
+        
+        String name = "";
+        int ID = 0;
+        //System.out.println("entering for loop!");
+        //System.out.println(showList.getLength());
+        for(int i = 1; i < showList.getLength(); i++){
+            //System.out.println("loopdy loop!");
+            Node theatreNode = showList.item(i);
+            
+            //System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
+            
+            Element element = (Element) theatreNode;
+
+            //System.out.println("Title: " + element.getElementsByTagName("Title").item(0).getTextContent());
+            
+            name = element.getElementsByTagName("Title").item(0).getTextContent();
+            try {
+                showStartDate = XMLDate.parse(element.getElementsByTagName("dttmShowStart").item(0).getTextContent());
+                showEndDate = XMLDate.parse(element.getElementsByTagName("dttmShowEnd").item(0).getTextContent());
+            } catch (ParseException ex) {
+                Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(showStartDate.after(startTime) && showEndDate.before(endTime)){
+                sList.add(new Showing(name, showStartDate, showEndDate));
+            }
+        }
+        
+        return sList;
+    }
+    
+    public ArrayList<Showing> GetShowsAtTheatreForDayThatStartBetweenTimes(int theatreID, Date date, Date startTime, Date endTime){
+        NodeList showList;
+        ArrayList sList = new ArrayList();
+        
+        System.out.println(theatreID);
+        
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        String sdate = ft.format(date);
+        
+        String content = null;
+        try {
+            content = URLReader.ReadURL("http://www.finnkino.fi/xml/Schedule/?area=" + theatreID + "&dt=" + sdate);
+        } catch (IOException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        DocumentBuilderFactory documentBuilderFactory = DocumentBuilderFactory.newInstance();
+        DocumentBuilder documentBuilder = null;
+        Document document = null;
+
+        try {
+            documentBuilder = documentBuilderFactory.newDocumentBuilder();
+        } catch (ParserConfigurationException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        try {
+            document = documentBuilder.parse(new InputSource(new ByteArrayInputStream(content.getBytes("utf-8"))));
+        } catch (SAXException | IOException ex) {
+            Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+        document.getDocumentElement().normalize();
+
+        //System.out.println("Root element: " + document.getDocumentElement().getNodeName());
+        
+        Node showParent = document.getDocumentElement().getElementsByTagName("Shows").item(0);
+        //System.out.println(showParent.getNodeName());
+
+        Element showParentElement = (Element) showParent;
+        //System.out.println("lapsia " + showParentElement.getElementsByTagName("Show").getLength());
+        showList = showParentElement.getElementsByTagName("Show");
+        
+        
+        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        Date showStartDate = null;
+        Date showEndDate = null;
+        
+        String name = "";
+        int ID = 0;
+        //System.out.println("entering for loop!");
+        //System.out.println(showList.getLength());
+        for(int i = 1; i < showList.getLength(); i++){
+            //System.out.println("loopdy loop!");
+            Node theatreNode = showList.item(i);
+            
+            //System.out.println("\nCurrent Element :" + theatreNode.getNodeName());
+            
+            Element element = (Element) theatreNode;
+
+            //System.out.println("Title: " + element.getElementsByTagName("Title").item(0).getTextContent());
+            
+            name = element.getElementsByTagName("Title").item(0).getTextContent();
+            try {
+                showStartDate = XMLDate.parse(element.getElementsByTagName("dttmShowStart").item(0).getTextContent());
+            } catch (ParseException ex) {
+                Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
+            }
+            
+            if(showStartDate.after(startTime) && showStartDate.before(endTime)){
+                sList.add(new Showing(name, showStartDate, showEndDate));
+            }
+        }
+        
+        return sList;
+    }
+    
     public ArrayList<Showing> GetShowsAtTheatreForDay(int theatreID, Date date){
         NodeList showList;
         ArrayList sList = new ArrayList();
@@ -173,7 +328,7 @@ public class MovieCompany {
             } catch (ParseException ex) {
                 Logger.getLogger(MovieCompany.class.getName()).log(Level.SEVERE, null, ex);
             }
-            //ID = Integer.parseInt(element.getElementsByTagName("ID").item(0).getTextContent());
+
             sList.add(new Showing(name, showStartDate, showEndDate));
         }
         

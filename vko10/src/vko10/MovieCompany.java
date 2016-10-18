@@ -226,7 +226,7 @@ public class MovieCompany {
         showList = showParentElement.getElementsByTagName("Show");
         
         
-        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Date showStartDate = null;
         Date showEndDate = null;
         
@@ -303,7 +303,7 @@ public class MovieCompany {
         showList = showParentElement.getElementsByTagName("Show");
         
         
-        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm:ss");
+        SimpleDateFormat XMLDate = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
         Date showStartDate = null;
         Date showEndDate = null;
         

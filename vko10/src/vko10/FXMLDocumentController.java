@@ -82,40 +82,61 @@ public class FXMLDocumentController implements Initializable {
         
         
         ArrayList<Showing> movies = null;
-        try {
+        if(showDateField.getText().isEmpty() && startTimeField.getText().isEmpty() && endTimeField.getText().isEmpty()){
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, new Date());
+        }else{
             // Construct date and time objects
             Calendar dateCal = Calendar.getInstance();
             Calendar timeCal = Calendar.getInstance();
 
-            dateCal.setTime(ftDate.parse(showDateField.getText()));
-            timeCal.setTime(ftTime.parse(startTimeField.getText()));
+            //parsing starttime
+            try{
+                try{
+                    dateCal.setTime(ftDate.parse(showDateField.getText()));
+                }catch(ParseException ex){
+                    dateCal.setTime(new Date());
+                }
+                timeCal.setTime(ftTime.parse(startTimeField.getText()));
 
 
-            // Extract the time of the "time" object to the "date"
-            dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
-            dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
-            dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
-
-            // Get the time value!
+                // Extract the time of the "time" object to the "date"
+                dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+                dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+                dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+            }catch(ParseException ex){
+                dateCal.set(Calendar.HOUR_OF_DAY, 0);
+                dateCal.set(Calendar.MINUTE, 0);
+                dateCal.set(Calendar.SECOND, 0);
+            }
+            // get starttime
             Date startDate = dateCal.getTime();
 
-            timeCal.setTime(ftTime.parse(endTimeField.getText()));
+            //parsing endtime
+            try{
+                timeCal.setTime(ftTime.parse(endTimeField.getText()));
 
-            // Extract the time of the "time" object to the "date"
-            dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
-            dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
-            dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
-
-            // Get the time value!
+                // Extract the time of the "time" object to the "date"
+                dateCal.set(Calendar.HOUR_OF_DAY, timeCal.get(Calendar.HOUR_OF_DAY));
+                dateCal.set(Calendar.MINUTE, timeCal.get(Calendar.MINUTE));
+                dateCal.set(Calendar.SECOND, timeCal.get(Calendar.SECOND));
+            }catch(ParseException ex){
+                dateCal.set(Calendar.HOUR_OF_DAY, 23);
+                dateCal.set(Calendar.MINUTE, 59);
+                dateCal.set(Calendar.SECOND, 59);
+            }
+            // get endtime
             Date endDate = dateCal.getTime();
 
-            Date date = ftDate.parse(showDateField.getText());
+            Date date;
+            //parse and get showdate
+            try{
+                date = ftDate.parse(showDateField.getText());
+            }catch(ParseException ex){
+                date = new Date();
+            }
 
             movies = MovieCompany.GetInstance().GetShowsAtTheatreForDayThatStartBetweenTimes(ID, date, startDate, endDate);
-            
-        } catch (ParseException ex) {
-            //Logger.getLogger(FXMLDocumentController.class.getName()).log(Level.SEVERE, null, ex);
-            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, new Date());
+
         }
         
         for(Showing s : movies){

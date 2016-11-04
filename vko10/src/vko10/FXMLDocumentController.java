@@ -41,7 +41,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private Button listMoviesButton;
     @FXML
-    private ComboBox<String> theatresCombo;
+    private ComboBox<Theatre> theatresCombo;
     @FXML
     private TextField showDateField;
     @FXML
@@ -73,16 +73,16 @@ public class FXMLDocumentController implements Initializable {
         showText("Ladataan...");
         
         listView.getItems().clear();
-        int ID = MovieCompany.GetInstance().GetTheatreByListPosition(theatresCombo.getSelectionModel().getSelectedIndex()).GetID();
+        Theatre selectedTheatre = theatresCombo.getSelectionModel().getSelectedItem();
+        int ID = selectedTheatre.GetID();
+        
         SimpleDateFormat ftDate = new SimpleDateFormat("dd.MM.yyyy");
         SimpleDateFormat ftTime = new SimpleDateFormat("HH:mm");
         SimpleDateFormat ftDateTime = new SimpleDateFormat("dd.MM.yyyy'T'HH:mm");
         
-        
-        
         ArrayList<Showing> movies = null;
         if(showDateField.getText().isEmpty() && startTimeField.getText().isEmpty() && endTimeField.getText().isEmpty()){
-            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(ID, new Date());
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDay(selectedTheatre, new Date());
         }else{
             // Construct date and time objects
             Calendar dateCal = Calendar.getInstance();
@@ -134,7 +134,7 @@ public class FXMLDocumentController implements Initializable {
                 date = new Date();
             }
 
-            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDayThatStartBetweenTimes(ID, date, startDate, endDate);
+            movies = MovieCompany.GetInstance().GetShowsAtTheatreForDayThatStartBetweenTimes(selectedTheatre, date, startDate, endDate);
 
         }
         
@@ -150,14 +150,22 @@ public class FXMLDocumentController implements Initializable {
         if(movieNameField.getText().isEmpty()) return;
         
         ArrayList<Showing> shows = MovieCompany.GetInstance().GetShowingsInfoByMovieName(movieNameField.getText());
-        showText(movieNameField.getText());
         
         SimpleDateFormat dayFormat = new SimpleDateFormat("dd.MM");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH.mm");
         
+        showText(movieNameField.getText() + " tänään:");
+
         listView.getItems().clear();
         for(Showing s : shows){
-            listView.getItems().add(s.GetTheatre().GetName() + ": " + dayFormat.format(s.GetStartTime()) + ": " + timeFormat.format(s.GetStartTime()) + "-" + timeFormat.format(s.GetEndTime()));
+            if(s.GetTitle() == null){
+                //listView.getItems().add("" + dayFormat.format(s.GetStartTime()) + ".\n");
+                continue;
+            }
+
+            listView.getItems().add(s.GetTheatre().GetName() + ": \n" 
+                    + timeFormat.format(s.GetStartTime()) 
+                    + "-" + timeFormat.format(s.GetEndTime()));
         }
     }
     
@@ -178,7 +186,7 @@ public class FXMLDocumentController implements Initializable {
     }
     
     private void addTheaterToCombo(Theatre t){
-        theatresCombo.getItems().add(t.GetName());
+        theatresCombo.getItems().add(t);
     }
     
     private String getTheaterURLContent(String address) throws MalformedURLException, IOException{

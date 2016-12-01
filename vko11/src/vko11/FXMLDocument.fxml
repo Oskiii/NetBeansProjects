@@ -16,7 +16,8 @@
         </columnConstraints>
         <rowConstraints>
           <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="369.0" vgrow="SOMETIMES" />
+          <RowConstraints maxHeight="392.0" minHeight="10.0" prefHeight="364.0" vgrow="SOMETIMES" />
+            <RowConstraints maxHeight="62.0" minHeight="10.0" prefHeight="62.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
             <WebView fx:id="webView" prefHeight="369.0" prefWidth="593.0" GridPane.rowIndex="1" />
@@ -50,6 +51,8 @@
                   </GridPane>
                </children>
             </GridPane>
+            <Button fx:id="shoutoutButton" mnemonicParsing="false" onAction="#shoutoutButtonAction" text="ShoutOut" GridPane.rowIndex="2" />
+            <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetButtonAction" text="Reset" GridPane.halignment="RIGHT" GridPane.rowIndex="2" />
          </children>
       </GridPane>
    </children>

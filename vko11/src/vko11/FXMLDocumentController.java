@@ -36,6 +36,10 @@ public class FXMLDocumentController implements Initializable {
     private Button reloadButton;
     @FXML
     private Button nextButton;
+    @FXML
+    private Button shoutoutButton;
+    @FXML
+    private Button resetButton;
     
     private void handleButtonAction(ActionEvent event) {
         System.out.println("You clicked me!");
@@ -57,6 +61,8 @@ public class FXMLDocumentController implements Initializable {
         
         if("index.html".equals(url)){
             webView.getEngine().load(FXMLDocumentController.class.getResource("index.html").toExternalForm());
+            Browser.GetInstance().SetCurrentPage(new Page(url));
+            Browser.GetInstance().AddPageToHistory(url);
             return;
         }
         
@@ -84,7 +90,7 @@ public class FXMLDocumentController implements Initializable {
     @FXML
     private void urlDoneAction(KeyEvent event) {
         if(event.getCode() == KeyCode.ENTER)
-        loadNewSite(null);
+            loadNewSite(null);
     }
 
     @FXML
@@ -108,6 +114,20 @@ public class FXMLDocumentController implements Initializable {
             loadHistorySite(Browser.GetInstance().GetNextPage());
         }catch(NullPointerException ex){
             //there's no next page
+        }
+    }
+
+    @FXML
+    private void shoutoutButtonAction(ActionEvent event) {
+        if("index.html".equals(Browser.GetInstance().GetCurrentPage().GetURL())){
+            webView.getEngine().executeScript("document.shoutOut()");
+        }
+    }
+
+    @FXML
+    private void resetButtonAction(ActionEvent event) {
+        if("index.html".equals(Browser.GetInstance().GetCurrentPage().GetURL())){
+            webView.getEngine().executeScript("initialize()");
         }
     }
 }

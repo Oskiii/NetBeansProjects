@@ -72,6 +72,8 @@ public class Bank {
             
             if(account != null){
                 account.AddMoney(amount); 
+            }else{
+                System.out.println("Tiliä ei ole olemassa.");
             }
            
             
@@ -89,9 +91,12 @@ public class Bank {
             Account account = FindAccountInList(num);
             
             if(account != null){
-                accounts.remove(account);   
+                accounts.remove(account);
+                System.out.println("Tili poistettu.");
+            }else{
+                System.out.println("Tiliä ei ole olemassa.");
             }
-            System.out.println("Tili poistettu.");
+            
             
         } catch (IOException ex) {
             Logger.getLogger(Mainclass.class.getName()).log(Level.SEVERE, null, ex);
@@ -111,6 +116,8 @@ public class Bank {
             
             if(account != null) {
                 account.TakeMoney(amount);
+            }else{
+                System.out.println("Tiliä ei ole olemassa.");
             }
             
         } catch (IOException ex) {
@@ -134,7 +141,10 @@ public class Bank {
     void PrintOneAccount(String num){
         Account account = FindAccountInList(num);
         
-        if(account == null) return;
+        if(account == null){
+            System.out.println("Tiliä ei ole olemassa.");
+            return;
+        }
         
         account.Print();
         

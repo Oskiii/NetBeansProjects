@@ -59,6 +59,7 @@ public class FXMLDocumentController implements Initializable {
             Bottle bottle = (Bottle)b;
             addBottleToDropdowns(bottle);
         }
+        System.out.println("Added bottles. There's " + BottleDispenser.getInstance().bottle_array.size() + " bottles");
     }
 
     @FXML
@@ -82,10 +83,9 @@ public class FXMLDocumentController implements Initializable {
                                 0f
                         )
                 );
-        BottleDispenser.getInstance().buyBottle(ID);
-        
         BottleDispenser.getInstance().SetLastPurchase((Bottle)BottleDispenser.getInstance().bottle_array.get(ID));
-        
+        BottleDispenser.getInstance().buyBottle(ID);
+
         bottleTypeDropdown.getItems().clear();
         bottleSizeDropdown.getItems().clear();
         addBottles();

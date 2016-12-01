@@ -36,8 +36,6 @@ public class Browser {
         return pageHistory;
     }
     
-    
-    
     public Page GetCurrentPage(){
         return currentPage;
     }

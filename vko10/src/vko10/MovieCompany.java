@@ -79,8 +79,6 @@ public class MovieCompany {
     public Theatre GetTheatreByListPosition(int pos){
         return theatres.get(pos);
     }
-    
-    
 
     private ArrayList ParseTheatreData(String content) throws ParserConfigurationException, SAXException, IOException{
         NodeList theatreList;

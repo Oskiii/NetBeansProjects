@@ -6,6 +6,7 @@
 package vko9;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
@@ -126,8 +127,9 @@ public class BottleDispenser {
         DecimalFormat format = new DecimalFormat("0.#");
         
         try{
-            BufferedWriter out = new BufferedWriter(new FileWriter( location));
-            String c;
+            File file = new File(location);
+            file.createNewFile();
+            FileWriter out = new FileWriter(file, false);
             
             out.write("KUITTI\r\n");
             out.write(lastPurchase.name);

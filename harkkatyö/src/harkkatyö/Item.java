@@ -1,0 +1,29 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package harkkatyö;
+
+/**
+ *
+ * @author Oski
+ */
+public class Item {
+    protected String name;
+    protected Float[] dimensions;
+    protected Float weight;
+    protected Boolean fragile;
+    
+    Item(String n, Float[] d, Float w, Boolean f){
+        name = n;
+        dimensions = d;
+        weight = w;
+        fragile = f;
+    }
+    
+    @Override
+    public String toString(){
+        return name;
+    }
+}

@@ -1,0 +1,16 @@
+/*
+Oskari Liukku
+0435843
+*/
+/* 
+    Created on : Dec 10, 2016, 3:45:10 PM
+    Author     : Oskari Liukku
+*/
+
+.button {
+    -fx-text-fill: black;
+    -fx-font-family: "Arial Narrow";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#f4b342, #f4e542);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}

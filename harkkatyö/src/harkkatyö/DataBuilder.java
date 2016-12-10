@@ -38,9 +38,9 @@ public class DataBuilder {
         return instance;
     }
 
-    public void ReadXML(){
+    public void ReadXML(String source){
         try {
-            URL url = new URL("http://smartpost.ee/fi_apt.xml");
+            URL url = new URL(source);
             
             BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
             

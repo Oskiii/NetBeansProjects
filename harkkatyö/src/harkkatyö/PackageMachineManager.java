@@ -24,7 +24,7 @@ public class PackageMachineManager {
     
     public void InitMachineList(){
         machines = new ArrayList<>();
-            DataBuilder.GetInstance().ReadXML();
+            DataBuilder.GetInstance().ReadXML("http://smartpost.ee/fi_apt.xml");
             //sorts by city name
             Collections.sort(machines);
     }

@@ -31,7 +31,7 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ComboBox fx:id="prebuiltCombo" layoutY="25.0" prefWidth="150.0" promptText="Items" />
+                        <ComboBox fx:id="prebuiltCombo" layoutY="25.0" onAction="#prebuiltComboAction" prefWidth="150.0" promptText="Items" />
                         <Text layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose item:" />
                         <Text layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="OR">
                            <font>
@@ -52,17 +52,17 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <RadioButton fx:id="firstClassCheck" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" onAction="#firstClassCheckAction" text="1. Class">
+                        <RadioButton fx:id="firstClassCheck" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="1. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="secondClassCheck" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" onAction="#secondClassCheckAction" text="2. Class">
+                        <RadioButton fx:id="secondClassCheck" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" text="2. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="thirdClassCheck" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" onAction="#thirdClassCheckAction" text="3. Class">
+                        <RadioButton fx:id="thirdClassCheck" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" text="3. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -72,7 +72,7 @@
                   </Pane>
                </children>
             </GridPane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create parcel" wrappingWidth="138.13671875">
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Create package" wrappingWidth="184.13671875">
                <GridPane.margin>
                   <Insets left="5.0" />
                </GridPane.margin>
@@ -94,11 +94,6 @@
                         <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipment Info" />
                         <ComboBox fx:id="sourceCityCombo" layoutX="3.0" layoutY="22.0" onHidden="#originClosedAction" prefHeight="25.0" prefWidth="226.0" promptText="Origin City" />
                         <ComboBox fx:id="sourceMachineCombo" layoutX="3.0" layoutY="47.0" prefHeight="25.0" prefWidth="226.0" promptText="Package Machine" />
-                        <Text fx:id="errorText" layoutX="19.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="198.13671875">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Text>
                      </children>
                      <padding>
                         <Insets right="5.0" />

@@ -15,7 +15,7 @@ import javafx.stage.Stage;
  *
  * @author Oski
  */
-public class Harkkatyö extends Application {
+public class Harkkatyo extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {

@@ -84,6 +84,10 @@ public class FXMLNewPacketWindowController implements Initializable {
 
     @FXML
     private void classInfoButtonAction(ActionEvent event) {
+        MessageWindowHandler.GetInstance().ShowMessage("Package Class Information: ",
+                "1st Class: Quick but has a max. range of 150 km\n"
+                + "2nd Class: Best for fragile shipments. Max. size: 10*10*10 cm\n"
+                + "3rd Class: Long range, but slower");
     }
 
     @FXML

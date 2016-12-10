@@ -12,6 +12,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -19,6 +20,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * FXML Controller class
@@ -81,10 +83,6 @@ public class FXMLMapViewWindowController implements Initializable {
             packagesInStorageCombo.getItems().add(p);
         }
     }
-    
-    private void error(String text){
-        errorText.setText(text);
-    }
 
     @FXML
     private void createPackageButtonAction(ActionEvent event) throws Exception {
@@ -101,7 +99,7 @@ public class FXMLMapViewWindowController implements Initializable {
     private void sendButtonAction(ActionEvent event) {
         Package i = packagesInStorageCombo.getSelectionModel().getSelectedItem();
         if(i == null){
-            error("Select package first!");
+            MessageWindowHandler.GetInstance().ShowError("Select package first!");
             return;
         }
         

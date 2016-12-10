@@ -38,14 +38,9 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <ComboBox fx:id="machinesCombo" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="266.0" promptText="Package Machine" />
+                        <ComboBox fx:id="machineCitiesCombo" layoutX="14.0" layoutY="39.0" prefHeight="25.0" prefWidth="266.0" promptText="Package Machine" />
                         <Button fx:id="addMachineOntoMapButton" layoutX="185.0" layoutY="64.0" mnemonicParsing="false" onAction="#addMachineontoMapButtonAction" text="Add Onto Map" />
                         <Text layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Add Package Machines onto Map:" />
-                        <Text fx:id="errorText" layoutX="11.0" layoutY="121.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="273.13671875">
-                           <font>
-                              <Font size="19.0" />
-                           </font>
-                        </Text>
                      </children>
                   </Pane>
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.halignment="RIGHT">

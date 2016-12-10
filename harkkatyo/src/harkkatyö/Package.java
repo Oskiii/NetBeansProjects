@@ -5,13 +5,13 @@
  */
 package harkkatyö;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
 /**
  *
  * @author Oski
  */
-public abstract class Package {
+public abstract class Package implements Serializable{
     protected int speed;
     protected Float[] dimensions;
     private Item containsItem;

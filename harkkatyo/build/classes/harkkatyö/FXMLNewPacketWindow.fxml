@@ -8,7 +8,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="482.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harkkatyö.FXMLNewPacketWindowController">
+<AnchorPane id="AnchorPane" prefHeight="394.0" prefWidth="482.0" style="-fx-background-color: orange;" stylesheets="@packageEditScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harkkatyö.FXMLNewPacketWindowController">
    <children>
       <GridPane alignment="BASELINE_CENTER" prefHeight="394.0" prefWidth="482.0">
         <columnConstraints>
@@ -47,27 +47,27 @@
                   </Pane>
                   <Pane layoutX="10.0" layoutY="10.0" prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
-                        <Text layoutY="16.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose class">
+                        <Text layoutX="14.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Choose class:">
                            <font>
-                              <Font size="15.0" />
+                              <Font size="19.0" />
                            </font>
                         </Text>
-                        <RadioButton fx:id="firstClassCheck" layoutX="14.0" layoutY="54.0" mnemonicParsing="false" text="1. Class">
+                        <RadioButton fx:id="firstClassCheck" layoutX="18.0" layoutY="80.0" mnemonicParsing="false" text="1. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="secondClassCheck" layoutX="14.0" layoutY="88.0" mnemonicParsing="false" text="2. Class">
+                        <RadioButton fx:id="secondClassCheck" layoutX="18.0" layoutY="114.0" mnemonicParsing="false" text="2. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </RadioButton>
-                        <RadioButton fx:id="thirdClassCheck" layoutX="14.0" layoutY="122.0" mnemonicParsing="false" text="3. Class">
+                        <RadioButton fx:id="thirdClassCheck" layoutX="18.0" layoutY="148.0" mnemonicParsing="false" text="3. Class">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </RadioButton>
-                        <Button fx:id="classInfoButton" layoutX="148.0" layoutY="154.0" mnemonicParsing="false" onAction="#classInfoButtonAction" text="Class Info" />
+                        <Button fx:id="classInfoButton" layoutX="148.0" layoutY="147.0" mnemonicParsing="false" onAction="#classInfoButtonAction" text="Class Info" />
                      </children>
                   </Pane>
                </children>
@@ -77,7 +77,7 @@
                   <Insets left="5.0" />
                </GridPane.margin>
                <font>
-                  <Font size="22.0" />
+                  <Font name="System Bold" size="25.0" />
                </font>
             </Text>
             <GridPane GridPane.rowIndex="2">
@@ -91,9 +91,13 @@
                <children>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipment Info" />
-                        <ComboBox fx:id="sourceCityCombo" layoutX="3.0" layoutY="22.0" onHidden="#originClosedAction" prefHeight="25.0" prefWidth="226.0" promptText="Origin City" />
-                        <ComboBox fx:id="sourceMachineCombo" layoutX="3.0" layoutY="47.0" prefHeight="25.0" prefWidth="226.0" promptText="Package Machine" />
+                        <Text layoutX="3.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Shipment Info:">
+                           <font>
+                              <Font size="15.0" />
+                           </font></Text>
+                        <ComboBox fx:id="sourceCityCombo" layoutY="22.0" onHidden="#originClosedAction" prefHeight="25.0" prefWidth="226.0" promptText="Origin City" />
+                        <ComboBox fx:id="sourceMachineCombo" layoutY="52.0" prefHeight="25.0" prefWidth="226.0" promptText="Package Machine" />
+                        <Button fx:id="cancelButton" layoutY="95.0" mnemonicParsing="false" onAction="#cancelButtonAction" prefHeight="33.0" prefWidth="95.0" text="Cancel" />
                      </children>
                      <padding>
                         <Insets right="5.0" />
@@ -102,9 +106,8 @@
                   <Pane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1">
                      <children>
                         <ComboBox fx:id="destinationCityCombo" layoutY="23.0" onHidden="#destinationClosedAction" prefHeight="25.0" prefWidth="236.0" promptText="Destination City" />
-                        <ComboBox fx:id="destinationMachineCombo" layoutY="48.0" prefHeight="25.0" prefWidth="236.0" promptText="Package Machine" />
-                        <Button fx:id="cancelButton" layoutX="34.0" layoutY="98.0" mnemonicParsing="false" onAction="#cancelButtonAction" text="Cancel" />
-                        <Button fx:id="createPacket" layoutX="131.0" layoutY="98.0" mnemonicParsing="false" onAction="#createPacketButtonAction" prefHeight="25.0" prefWidth="105.0" text="Finish" />
+                        <ComboBox fx:id="destinationMachineCombo" layoutY="52.0" prefHeight="25.0" prefWidth="236.0" promptText="Package Machine" />
+                        <Button fx:id="createPacket" layoutX="97.0" layoutY="95.0" mnemonicParsing="false" onAction="#createPacketButtonAction" prefHeight="33.0" prefWidth="138.0" text="Finish" />
                      </children>
                      <padding>
                         <Insets left="5.0" />
@@ -118,4 +121,7 @@
          </padding>
       </GridPane>
    </children>
+   <padding>
+      <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+   </padding>
 </AnchorPane>

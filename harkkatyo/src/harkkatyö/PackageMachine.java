@@ -4,11 +4,13 @@
  */
 package harkkatyö;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Oskari Liukku
  */
-public class PackageMachine implements Comparable {
+public class PackageMachine implements Comparable, Serializable {
     private String name;
     private GeoPoint location;
     private String availabilityInfo;

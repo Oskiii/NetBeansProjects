@@ -6,11 +6,17 @@ package harkkatyö;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
@@ -101,6 +107,44 @@ public class Utilities {
             
         }catch(IOException ex){
             System.out.println("File not found!");
+        }
+        SaveState();
+    }
+    
+    public void SaveState(){
+        /*try (FileOutputStream fileOut = new FileOutputStream("timo.tmo")) {
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(new ProgState());
+            out.close();
+        }catch(IOException i) {
+            i.printStackTrace();
+        }
+        System.out.printf("Saved data in /tmp/timo.tmo");*/
+    }
+    
+    public void LoadState(){
+        try {
+         FileInputStream fileIn = new FileInputStream("/tmp/timo.tmo");
+         ObjectInputStream in = new ObjectInputStream(fileIn);
+         Object e = in.readObject();
+         in.close();
+         fileIn.close();
+      }catch(IOException i) {
+         i.printStackTrace();
+         return;
+      }catch(ClassNotFoundException c) {
+         System.out.println("Employee class not found");
+         c.printStackTrace();
+         return;
+      }
+    }
+    
+    class ProgState implements Serializable{
+        ArrayList<Package> storage;
+        
+        ProgState(){
+            storage = Storage.GetInstance().GetPackages();
+            
         }
     }
 }

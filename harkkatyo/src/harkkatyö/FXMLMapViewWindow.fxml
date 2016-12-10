@@ -9,7 +9,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harkkatyö.FXMLMapViewWindowController">
+<AnchorPane id="AnchorPane" minHeight="600.0" minWidth="1000.0" prefHeight="800.0" prefWidth="1200.0" stylesheets="@mapScreen.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="harkkatyö.FXMLMapViewWindowController">
    <children>
       <TabPane fx:id="tabPane" side="BOTTOM" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="4.0" AnchorPane.topAnchor="0.0">
          <tabs>
@@ -26,7 +26,7 @@
                     </rowConstraints>
                      <children>
                         <WebView fx:id="webView" prefHeight="-1.0" prefWidth="-1.0" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="TIMO System">
+                        <Text id="programTitle" strokeType="OUTSIDE" strokeWidth="0.0" text="TIMO System">
                            <font>
                               <Font name="System Bold" size="20.0" />
                            </font>
@@ -57,8 +57,8 @@
                                     </Text>
                                     <Button fx:id="createPackageButton" alignment="CENTER" layoutX="4.0" layoutY="58.0" mnemonicParsing="false" onAction="#createPackageButtonAction" prefHeight="52.0" prefWidth="139.0" text="Create Package" />
                                     <Button fx:id="sendButton" alignment="CENTER" layoutX="145.0" layoutY="87.0" mnemonicParsing="false" onAction="#sendButtonAction" prefHeight="51.0" prefWidth="138.0" text="Send Package" textAlignment="CENTER" />
-                                    <Button fx:id="clearMapButton" layoutX="2.0" layoutY="113.0" mnemonicParsing="false" onAction="#clearMapButtonAction" prefHeight="25.0" prefWidth="139.0" text="Clear Routes from Map" />
-                                    <ComboBox fx:id="packagesInStorageCombo" layoutX="4.0" layoutY="31.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="283.0" promptText="Packages in Storage" />
+                                    <Button fx:id="clearMapButton" layoutX="2.0" layoutY="113.0" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#clearMapButtonAction" prefHeight="25.0" prefWidth="139.0" text="Clear Routes" />
+                                    <ComboBox fx:id="packagesInStorageCombo" layoutX="2.0" layoutY="26.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="283.0" promptText="Packages in Storage" />
                                     <Button fx:id="editPackageButton" alignment="CENTER" layoutX="147.0" layoutY="58.0" mnemonicParsing="false" onAction="#editPackageButtonAction" prefHeight="25.0" prefWidth="139.0" text="Edit Package" />
                                  </children>
                               </Pane>

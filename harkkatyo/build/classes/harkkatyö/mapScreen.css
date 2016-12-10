@@ -9,8 +9,86 @@ Oskari Liukku
 
 .button {
     -fx-text-fill: black;
-    -fx-font-family: "Arial Narrow";
+    -fx-font-family: "Arial";
     -fx-font-weight: bold;
-    -fx-background-color: linear-gradient(#f4b342, #f4e542);
+    -fx-background-color: linear-gradient(#f4e542, #f4b342);
     -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.tab-pane *.tab-header-background 
+{
+-fx-background-color: #704803;
+-fx-effect: innershadow(two-pass-box , #f4b342 , 4, 0.0 , 0 , 0);
+}
+
+.tab{
+    -fx-background-color: FF9D00;
+}
+
+.tab:selected{
+    -fx-border-color: #f4b342;
+
+}
+
+.dialog-pane{
+    -fx-background-color: orange;
+}
+
+.text-area .content{
+    -fx-background-color: #f4b342;
+}
+
+.text-area{
+    -fx-text-fill: white;
+    -fx-font-size: 17;
+
+}
+
+.combo-box{
+    -fx-text-fill: black;
+    -fx-font-family: "Arial";
+    -fx-font-weight: bold;
+    -fx-background-color: linear-gradient(#f4e542, #f4b342);
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.combo-box-popup .list-view 
+{
+    -fx-background-color: #f4e542;
+    -fx-background-insets: 0, 1;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 8, 0.0 , 0 , 0 );
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-text-fill: #f4b342;
+}
+
+.combo-box .cell:selected {
+    -fx-text-fill: #704803;
+}
+
+.combo-box-popup .list-view .list-cell 
+{
+    -fx-padding: 4 0 4 5;
+
+    /* No alternate highlighting */
+    -fx-background-color: white;
+}
+
+.root {
+     -fx-background-color: FF9D00;
+}
+
+.label {
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-text-fill: black;
+    -fx-effect: dropshadow( gaussian , rgba(255,255,255,0.5) , 0,0,0,1 );
+}
+
+#programTitle{
+    -fx-font-size: 32px;
+   -fx-font-family: "Arial Black";
+   -fx-fill: #f47442;
+   -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
 }

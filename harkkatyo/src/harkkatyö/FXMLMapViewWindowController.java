@@ -199,7 +199,7 @@ public class FXMLMapViewWindowController implements Initializable {
         
         //error if route too long (even though it's already sent)
         if(Float.parseFloat(length.toString()) > i.GetMaxDistance()){
-            Utilities.GetInstance().ShowError("Journey too long! (tut tut)");
+            Utilities.GetInstance().ShowError("Journey too long! (I sure wish I could stop you!)");
         }
         
         //write to log that we sent package

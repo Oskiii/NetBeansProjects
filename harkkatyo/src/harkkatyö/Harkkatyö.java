@@ -29,6 +29,7 @@ public class Harkkatyö extends Application {
         
         stage.setScene(scene);
         stage.show();
+        stage.setTitle("TIMO");
         
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
           @Override

@@ -133,6 +133,8 @@ public class FXMLMapViewWindowController implements Initializable {
         Scene scene = new Scene(root);
         
         stage.setScene(scene);
+        stage.setTitle("TIMO Package Creation");
+
         
         stage.show();
     }

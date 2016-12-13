@@ -1,6 +1,6 @@
 
-[13.12.2016 12:40:59]		--------- TIMO LOG ---------
-[13.12.2016 12:40:59]	Initialized TIMO with 479 machines.
+[13.12.2016 12:58:01]		--------- TIMO LOG ---------
+[13.12.2016 12:58:01]	Initialized TIMO with 479 machines.
 
 
-[13.12.2016 12:41:17]	Storage: 
+[13.12.2016 12:58:15]	Storage: 

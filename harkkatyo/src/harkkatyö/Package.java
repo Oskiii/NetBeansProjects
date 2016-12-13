@@ -32,29 +32,29 @@ public abstract class Package implements Serializable{
     }
     
     //returns package's max distance
-    public int GetMaxDistance(){
+    public int getMaxDistance(){
         return maxDistance;
     }
     
     //sets item in package
-    public void SetItem(Item i) throws PackageSizeException, FragilityException{
+    public void setItem(Item i) throws PackageSizeException, FragilityException{
         
         //if item doesn't fit
-        if(i.GetDimensions()[0] > dimensions[0] || i.GetDimensions()[1] > dimensions[1] || i.GetDimensions()[2] > dimensions[2]){
-            throw new PackageSizeException("Item doesn't fit! Dimensions of " + classString + " class package are " + GetDimensionsString() + " cm!");
+        if(i.getDimensions()[0] > dimensions[0] || i.getDimensions()[1] > dimensions[1] || i.getDimensions()[2] > dimensions[2]){
+            throw new PackageSizeException("Item doesn't fit! Dimensions of " + classString + " class package are " + getDimensionsString() + " cm!");
         }
         containsItem = i;
     }
     
-    public Item GetItem(){
+    public Item getItem(){
         return containsItem;
     }
     
-    public int GetClassInt(){
+    public int getClassInt(){
         return classInt;
     }
     
-    public String GetClassString(){
+    public String getClassString(){
         return classString;
     }
     
@@ -63,20 +63,20 @@ public abstract class Package implements Serializable{
         return containsItem.toString() + ", " + classString + " Class";
     }
     
-    public PackageMachine GetOriginMachine(){
+    public PackageMachine getOriginMachine(){
         return originMachine;
     }
     
-    public PackageMachine GetDestinationMachine(){
+    public PackageMachine getDestinationMachine(){
         return destinationMachine;
     }
     
-    public int GetSpeed(){
+    public int getSpeed(){
         return speed;
     }
     
     //get dimensions in string form
-    public String GetDimensionsString(){
+    public String getDimensionsString(){
         return dimensions[0] + "*" + dimensions[1] + "*" + dimensions[2];
     }
 }

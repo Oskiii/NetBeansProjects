@@ -33,7 +33,7 @@ public class Harkkatyö extends Application {
         stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
           @Override
           public void handle(WindowEvent we) {
-              Utilities.GetInstance().WriteFinalLogToFile();
+              Utilities.GetInstance().writeFinalLogToFile();
           }
       });  
     }

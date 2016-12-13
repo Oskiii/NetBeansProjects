@@ -28,23 +28,23 @@ public class Item {
     }
     
     //return dimensions in string form
-    public String DimensionsToString(){
+    public String dimensionsToString(){
         return dimensions[0].toString() + "*" + dimensions[1].toString() + "*" + dimensions[2].toString();
     }
     
-    public Float[] GetDimensions(){
+    public Float[] getDimensions(){
         return dimensions;
     }
     
-    public Float GetWeight(){
+    public Float getWeight(){
         return weight;
     }
     
-    public Boolean GetFragility(){
+    public Boolean getFragility(){
         return fragile;
     }
     
-    public String GetName(){
+    public String getName(){
         return name;
     }
 }

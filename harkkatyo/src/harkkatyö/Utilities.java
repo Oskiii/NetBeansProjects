@@ -7,14 +7,11 @@ package harkkatyö;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,13 +35,13 @@ public class Utilities {
     //init
     private Utilities(){
         dt = new SimpleDateFormat("dd.MM.yyyy HH:mm:ss");
-        WriteToLog("\t--------- TIMO LOG ---------");
+        writeToLog("\t--------- TIMO LOG ---------");
     }
     
     DateFormat dt;
     
     //show an error popup
-    public void ShowError(String text){
+    public void showError(String text){
         Alert alert = new Alert(AlertType.ERROR);
         alert.setTitle("Error");
         alert.setHeaderText(null);
@@ -53,7 +50,7 @@ public class Utilities {
     }
     
     //show a message popup
-    public void ShowMessage(String headerText, String bodyText){
+    public void showMessage(String headerText, String bodyText){
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Info");
         alert.setHeaderText(headerText);
@@ -62,15 +59,15 @@ public class Utilities {
     }
     
     //write a line to log
-    public void WriteToLog(String text){
+    public void writeToLog(String text){
         Date date = new Date();
         String d = dt.format(date);
         //write time and line to log
-        FXMLMapViewWindowController.GetInstance().AddLogRow("[" + d + "]\t" + text);
+        FXMLMapViewWindowController.GetInstance().addLogRow("[" + d + "]\t" + text);
     }
     
     //write log and storage info to file (on close)
-    public void WriteFinalLogToFile(){
+    public void writeFinalLogToFile(){
         String location = System.getProperty( "user.dir" ) + "/log.txt";
         
         try{
@@ -81,7 +78,7 @@ public class Utilities {
             BufferedWriter bf = new BufferedWriter(new FileWriter(file, false));
             
             //write contents of log to file
-            String text = FXMLMapViewWindowController.GetInstance().GetLogText();
+            String text = FXMLMapViewWindowController.GetInstance().getLogText();
             for (String line : text.split("\\n")){
                 bf.write(line);
                 bf.newLine();
@@ -98,7 +95,7 @@ public class Utilities {
             bf.newLine();
 
             //write storage contents
-            for(Package p : Storage.GetInstance().GetPackages()){
+            for(Package p : Storage.GetInstance().getPackages()){
                 bf.write("[" + d + "]\t" + p.toString());
                 bf.newLine();
             }
@@ -108,10 +105,10 @@ public class Utilities {
         }catch(IOException ex){
             System.out.println("File not found!");
         }
-        SaveState();
+        saveState();
     }
     
-    public void SaveState(){
+    public void saveState(){
         /*try (FileOutputStream fileOut = new FileOutputStream("timo.tmo")) {
             ObjectOutputStream out = new ObjectOutputStream(fileOut);
             out.writeObject(new ProgState());
@@ -122,7 +119,7 @@ public class Utilities {
         System.out.printf("Saved data in /tmp/timo.tmo");*/
     }
     
-    public void LoadState(){
+    public void loadState(){
         try {
          FileInputStream fileIn = new FileInputStream("/tmp/timo.tmo");
          ObjectInputStream in = new ObjectInputStream(fileIn);
@@ -143,7 +140,7 @@ public class Utilities {
         ArrayList<Package> storage;
         
         ProgState(){
-            storage = Storage.GetInstance().GetPackages();
+            storage = Storage.GetInstance().getPackages();
             
         }
     }

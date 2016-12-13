@@ -22,11 +22,11 @@ public class FirstClassPackage extends Package {
     }
     
     //set item, check for fragility
-    public void SetItem(Item item) throws PackageSizeException, FragilityException {
+    public void setItem(Item item) throws PackageSizeException, FragilityException {
         if(item.fragile){
             throw new FragilityException();
         }
         
-        super.SetItem(item);
+        super.setItem(item);
     }
 }

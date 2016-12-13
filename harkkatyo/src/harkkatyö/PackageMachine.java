@@ -21,11 +21,11 @@ public class PackageMachine implements Comparable, Serializable {
         availabilityInfo = availability;
     }
     
-    public String GetName(){
+    public String getName(){
         return name;
     }
     
-    public String GetAvailability(){
+    public String getAvailability(){
         return availabilityInfo;
     }
     
@@ -33,16 +33,16 @@ public class PackageMachine implements Comparable, Serializable {
     public String toString(){
         //crop "Pakettiautomaatti" out of name for printing
         String[] str = name.split(", ", 2);
-        return str[1] + " - " + location.GetAddress().GetStreetAddress() + ", " + location.GetAddress().GetPostcode() + " " + location.GetAddress().GetCity();
+        return str[1] + " - " + location.getAddress().getStreetAddress() + ", " + location.getAddress().getPostcode() + " " + location.getAddress().getCity();
     }
     
-    public GeoPoint GetLocation(){
+    public GeoPoint getLocation(){
         return location;
     }
 
     //for sorting
     @Override
     public int compareTo(Object o) {
-        return location.GetAddress().GetCity().compareTo(((PackageMachine)o).GetLocation().GetAddress().GetCity());
+        return location.getAddress().getCity().compareTo(((PackageMachine)o).getLocation().getAddress().getCity());
     }
 }

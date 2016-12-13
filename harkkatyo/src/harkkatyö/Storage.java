@@ -25,7 +25,7 @@ public class Storage {
 
     private ArrayList<Package> packagesInStorage;
     
-    public ArrayList<Package> GetPackages(){
+    public ArrayList<Package> getPackages(){
         return packagesInStorage;
     }
     

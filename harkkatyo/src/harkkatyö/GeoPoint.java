@@ -19,15 +19,15 @@ public class GeoPoint {
         longitude = lng;
     }
     
-    public Address GetAddress(){
+    public Address getAddress(){
         return address;
     }
     
-    public double GetLatitude(){
+    public double getLatitude(){
         return latitude;
     }
     
-    public double GetLongitude(){
+    public double getLongitude(){
         return longitude;
     }
     

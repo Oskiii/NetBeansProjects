@@ -10,9 +10,6 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilder;
@@ -39,7 +36,7 @@ public class DataBuilder {
     }
 
     //read XML into document form
-    public void ReadXML(String source){
+    public void readXML(String source){
         try {
             URL url = new URL(source);
             
@@ -58,7 +55,7 @@ public class DataBuilder {
             Document doc = dBuilder.parse(new InputSource(new StringReader(content)));
             doc.getDocumentElement().normalize();
             
-            ParseData(doc);
+            parseData(doc);
             
         } catch (MalformedURLException ex) {
             Logger.getLogger(DataBuilder.class.getName()).log(Level.SEVERE, null, ex);
@@ -70,7 +67,7 @@ public class DataBuilder {
     }
     
     //parse data from document
-    private void ParseData(Document doc){
+    private void parseData(Document doc){
         //get all nodes by tag
         NodeList nodes = doc.getElementsByTagName("place");        
         System.out.println(nodes.getLength());
@@ -91,7 +88,7 @@ public class DataBuilder {
             GeoPoint gp = new GeoPoint(add, lat, lng);
             String availability = getValue("availability",e);
             PackageMachine p = new PackageMachine(name, new GeoPoint(add,lat,lng), availability);
-            PackageMachineManager.GetInstance().AddMachine(p);
+            PackageMachineManager.GetInstance().addMachine(p);
             
         }
     }

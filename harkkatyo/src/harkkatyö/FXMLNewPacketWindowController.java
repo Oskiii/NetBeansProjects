@@ -7,8 +7,6 @@ package harkkatyö;
 
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,11 +15,9 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.text.Text;
 
 /**
  *
@@ -29,7 +25,7 @@ import javafx.scene.text.Text;
  */
 public class FXMLNewPacketWindowController implements Initializable {
     ToggleGroup toggleGroup;
-    private Label label;
+    
     @FXML
     private ComboBox<Item> prebuiltCombo;
     @FXML
@@ -92,7 +88,7 @@ public class FXMLNewPacketWindowController implements Initializable {
     
     //populate city combos
     private void addItemsToCityCombos(){
-        for(String s : PackageMachineManager.GetInstance().GetUniqueCities()){
+        for(String s : PackageMachineManager.GetInstance().getUniqueCities()){
             sourceCityCombo.getItems().add(s);
             destinationCityCombo.getItems().add(s);
         }
@@ -101,7 +97,7 @@ public class FXMLNewPacketWindowController implements Initializable {
     //show info about classes
     @FXML
     private void classInfoButtonAction(ActionEvent event) {
-        Utilities.GetInstance().ShowMessage("Package Class Information: ",
+        Utilities.GetInstance().showMessage("Package Class Information: ",
                 "1st Class: Quick but has a max. range of 150 km\n"
                 + "2nd Class: Best for fragile shipments. Max. size: 10*10*10 cm\n"
                 + "3rd Class: Long range, but slower");
@@ -124,10 +120,10 @@ public class FXMLNewPacketWindowController implements Initializable {
         
         //error checking for machine selection
         if(sourceMachineCombo.getSelectionModel().getSelectedItem() == null){
-            Utilities.GetInstance().ShowError("Set origin machine first!");
+            Utilities.GetInstance().showError("Set origin machine first!");
             return;
         }else if(destinationMachineCombo.getSelectionModel().getSelectedItem() == null){
-            Utilities.GetInstance().ShowError("Set destination machine first!");
+            Utilities.GetInstance().showError("Set destination machine first!");
             return;
         }
         try{
@@ -149,23 +145,23 @@ public class FXMLNewPacketWindowController implements Initializable {
                             destinationMachineCombo.getSelectionModel().getSelectedItem());
                     break;
                 default:
-                    Utilities.GetInstance().ShowError("Select package class first!");
+                    Utilities.GetInstance().showError("Select package class first!");
                     return;
             }
         }catch(InvalidRouteException ex){
-            Utilities.GetInstance().ShowError(ex.getMessage());
+            Utilities.GetInstance().showError(ex.getMessage());
             return;
         }
         
         try {
             //add item into package
-            packet.SetItem(item);
+            packet.setItem(item);
         }catch(PackageSizeException ex){
-            Utilities.GetInstance().ShowError(ex.getMessage());
+            Utilities.GetInstance().showError(ex.getMessage());
             return;
         } catch (FragilityException ex) {
             //tried to add into unsuitable package
-            Utilities.GetInstance().ShowError("Class isn't suitable for fragile items!");
+            Utilities.GetInstance().showError("Class isn't suitable for fragile items!");
         }
 
         
@@ -173,42 +169,42 @@ public class FXMLNewPacketWindowController implements Initializable {
         if(editingItemIndex != -1){
             System.out.println("Edited item " + getItem().toString());
             
-            Package old = Storage.GetInstance().GetPackages().get(editingItemIndex);
+            Package old = Storage.GetInstance().getPackages().get(editingItemIndex);
             
             //add info row to log
-            Utilities.GetInstance().WriteToLog("Edited package: " + 
+            Utilities.GetInstance().writeToLog("Edited package: " + 
                     packet + 
                     " [" + 
-                    packet.GetOriginMachine().GetLocation().GetAddress().GetCity() + 
+                    packet.getOriginMachine().getLocation().getAddress().getCity() + 
                     " -> " + 
-                    packet.GetDestinationMachine().GetLocation().GetAddress().GetCity() + 
+                    packet.getDestinationMachine().getLocation().getAddress().getCity() + 
                     "]\t(Old: " + 
                     old + 
                     " [" + 
-                    old.GetOriginMachine().GetLocation().GetAddress().GetCity() + 
+                    old.getOriginMachine().getLocation().getAddress().getCity() + 
                     " -> " + 
-                    old.GetDestinationMachine().GetLocation().GetAddress().GetCity() + 
+                    old.getDestinationMachine().getLocation().getAddress().getCity() + 
                     "])"
                     );
             
             //replace package in storage with edited one
-            Storage.GetInstance().GetPackages().set(editingItemIndex, packet);
+            Storage.GetInstance().getPackages().set(editingItemIndex, packet);
             
         }else{
             System.out.println("Added item " + getItem().toString());
             //add package to storage
-            Storage.GetInstance().GetPackages().add(packet);
-            Utilities.GetInstance().WriteToLog("Created package: " + 
+            Storage.GetInstance().getPackages().add(packet);
+            Utilities.GetInstance().writeToLog("Created package: " + 
                     packet + 
                     " (" + 
-                    packet.GetOriginMachine().GetLocation().GetAddress().GetCity() + 
+                    packet.getOriginMachine().getLocation().getAddress().getCity() + 
                     " -> " + 
-                    packet.GetDestinationMachine().GetLocation().GetAddress().GetCity() + 
+                    packet.getDestinationMachine().getLocation().getAddress().getCity() + 
                     ")");
         }
         
         //update packages in storage combobox
-        FXMLMapViewWindowController.GetInstance().UpdateStorageCombo();
+        FXMLMapViewWindowController.GetInstance().updateStorageCombo();
         //close window
         ((Node)(event.getSource())).getScene().getWindow().hide();
         editingItemIndex = -1;
@@ -232,7 +228,7 @@ public class FXMLNewPacketWindowController implements Initializable {
         
         //if name is empty, error
         if(name.length() == 0){
-            Utilities.GetInstance().ShowError("Set item name first!");
+            Utilities.GetInstance().showError("Set item name first!");
             return null;
         }
         
@@ -246,7 +242,7 @@ public class FXMLNewPacketWindowController implements Initializable {
                 }
             }
         }catch(NumberFormatException ex){
-            Utilities.GetInstance().ShowError("Invalid item dimensions!");
+            Utilities.GetInstance().showError("Invalid item dimensions!");
             return null;
         }
         
@@ -254,7 +250,7 @@ public class FXMLNewPacketWindowController implements Initializable {
         try{
             weight = Float.parseFloat(newItemWeightField.getText());
         }catch(NumberFormatException ex){
-            Utilities.GetInstance().ShowError("Invalid weight!");
+            Utilities.GetInstance().showError("Invalid weight!");
             return null;
         }
         
@@ -288,7 +284,7 @@ public class FXMLNewPacketWindowController implements Initializable {
         sourceMachineCombo.getSelectionModel().clearSelection();
         sourceMachineCombo.getItems().clear();
         //add all machines at selected city into combo
-        for(PackageMachine m : PackageMachineManager.GetInstance().GetMachinesAtCity(sourceCityCombo.getSelectionModel().getSelectedItem())){
+        for(PackageMachine m : PackageMachineManager.GetInstance().getMachinesAtCity(sourceCityCombo.getSelectionModel().getSelectedItem())){
             sourceMachineCombo.getItems().add(m);
         }
     }
@@ -299,7 +295,7 @@ public class FXMLNewPacketWindowController implements Initializable {
         destinationMachineCombo.getSelectionModel().clearSelection();
         destinationMachineCombo.getItems().clear();
         //add all machines at selected city into combo
-        for(PackageMachine m : PackageMachineManager.GetInstance().GetMachinesAtCity(destinationCityCombo.getSelectionModel().getSelectedItem())){
+        for(PackageMachine m : PackageMachineManager.GetInstance().getMachinesAtCity(destinationCityCombo.getSelectionModel().getSelectedItem())){
             destinationMachineCombo.getItems().add(m);
         }
     }
@@ -314,35 +310,35 @@ public class FXMLNewPacketWindowController implements Initializable {
         
         //set info fields
         newItemNameField.setText(item.toString());
-        newItemSizeField.setText(item.DimensionsToString());
-        newItemWeightField.setText(item.GetWeight().toString());
-        newItemFragileCheck.setSelected(item.GetFragility());
+        newItemSizeField.setText(item.dimensionsToString());
+        newItemWeightField.setText(item.getWeight().toString());
+        newItemFragileCheck.setSelected(item.getFragility());
     }
     
     //Load pre-existing package's info back in
     //This is for editing packages
-    public void LoadPackageInfo(Package p, int index){
+    public void loadPackageInfo(Package p, int index){
         
         editingItemIndex = index;
         
         //toggle class toggle equal to package's class
-        toggleGroup.selectToggle(toggleGroup.getToggles().get(p.GetClassInt() - 1));
+        toggleGroup.selectToggle(toggleGroup.getToggles().get(p.getClassInt() - 1));
         
         //load cities into comboboxes
-        sourceCityCombo.getSelectionModel().select(p.originMachine.GetLocation().GetAddress().GetCity());
+        sourceCityCombo.getSelectionModel().select(p.originMachine.getLocation().getAddress().getCity());
         addMachinesToOriginCombo();
-        destinationCityCombo.getSelectionModel().select(p.destinationMachine.GetLocation().GetAddress().GetCity());
+        destinationCityCombo.getSelectionModel().select(p.destinationMachine.getLocation().getAddress().getCity());
         addMachinesToDestinationCombo();
         
         //load machines into comboboxes
-        sourceMachineCombo.getSelectionModel().select(p.GetOriginMachine());
-        destinationMachineCombo.getSelectionModel().select(p.GetDestinationMachine());
+        sourceMachineCombo.getSelectionModel().select(p.getOriginMachine());
+        destinationMachineCombo.getSelectionModel().select(p.getDestinationMachine());
 
         //set item info fields
-        Item item = p.GetItem();
+        Item item = p.getItem();
         newItemNameField.setText(item.toString());
-        newItemSizeField.setText(item.DimensionsToString());
-        newItemWeightField.setText(item.GetWeight().toString());
-        newItemFragileCheck.setSelected(item.GetFragility());
+        newItemSizeField.setText(item.dimensionsToString());
+        newItemWeightField.setText(item.getWeight().toString());
+        newItemFragileCheck.setSelected(item.getFragility());
     }
 }

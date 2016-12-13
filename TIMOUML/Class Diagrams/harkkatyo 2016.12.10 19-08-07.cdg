@@ -1,0 +1,459 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="harkkatyo">
+  <ClassDiagramComponents>
+    <Class name="Address" package="harkkatyö" visibility="public" xPosition="2014.0" yPosition="1213.0">
+      <Fields>
+        <Field name="postCode" type="int" visibility="private"/>
+        <Field name="city" type="String" visibility="private"/>
+        <Field name="address" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="int" name="p"/>
+          <Argument type="String" name="c"/>
+          <Argument type="String" name="a"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="GetCity" returnType="String" visibility="public"/>
+        <Method name="GetStreetAddress" returnType="String" visibility="public"/>
+        <Method name="GetPostcode" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="BarrelOfLube" package="harkkatyö" visibility="public" xPosition="304.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="CanOfWorms" package="harkkatyö" visibility="public" xPosition="482.0" yPosition="20.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="DataBuilder" package="harkkatyö" visibility="public" xPosition="422.0" yPosition="1187.0">
+      <Fields>
+        <Field name="instance" type="DataBuilder" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="GetInstance" returnType="DataBuilder" visibility="public" isStatic="true"/>
+        <Method name="ReadXML" returnType="void" visibility="public">
+          <Argument type="String" name="source"/>
+        </Method>
+        <Method name="ParseData" returnType="void" visibility="private">
+          <Argument type="Document" name="doc"/>
+        </Method>
+        <Method name="getValue" returnType="String" visibility="private">
+          <Argument type="String" name="tag"/>
+          <Argument type="Element" name="e"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FirstClassPackage" package="harkkatyö" visibility="public" xPosition="515.0" yPosition="789.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="PackageMachine" name="source"/>
+          <Argument type="PackageMachine" name="dest"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="SetItem" returnType="void" visibility="public">
+          <Argument type="Item" name="item"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FragilityException" package="harkkatyö" visibility="public" xPosition="49.0" yPosition="1035.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="FXMLMapViewWindowController" package="harkkatyö" visibility="public" xPosition="1347.0" yPosition="20.0">
+      <Fields>
+        <Field name="webView" type="WebView" visibility="private"/>
+        <Field name="packagesInStorageCombo" type="ComboBox&lt;Package&gt;" visibility="private"/>
+        <Field name="machineCitiesCombo" type="ComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="logTextArea" type="TextArea" visibility="private"/>
+        <Field name="machinesOnMap" type="ArrayList&lt;PackageMachine&gt;" visibility="private"/>
+        <Field name="instance" type="FXMLMapViewWindowController" visibility="private" isStatic="true"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="GetInstance" returnType="FXMLMapViewWindowController" visibility="public" isStatic="true"/>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="GetLogText" returnType="String" visibility="public"/>
+        <Method name="AddLogRow" returnType="void" visibility="public">
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="addMachinesOntoMapButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="UpdateStorageCombo" returnType="void" visibility="public"/>
+        <Method name="UpdatePackageInStorageCombo" returnType="void" visibility="public">
+          <Argument type="int" name="index"/>
+          <Argument type="Package" name="p"/>
+        </Method>
+        <Method name="createPackageButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="openPackageCreationWindow" returnType="void" visibility="private"/>
+        <Method name="sendButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="clearMapButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="editPackageButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="FXMLNewPacketWindowController" package="harkkatyö" visibility="public" xPosition="1781.0" yPosition="20.0">
+      <Fields>
+        <Field name="toggleGroup" type="ToggleGroup" visibility="package"/>
+        <Field name="prebuiltCombo" type="ComboBox&lt;Item&gt;" visibility="private"/>
+        <Field name="newItemNameField" type="TextField" visibility="private"/>
+        <Field name="newItemSizeField" type="TextField" visibility="private"/>
+        <Field name="newItemWeightField" type="TextField" visibility="private"/>
+        <Field name="newItemFragileCheck" type="CheckBox" visibility="private"/>
+        <Field name="firstClassCheck" type="RadioButton" visibility="private"/>
+        <Field name="secondClassCheck" type="RadioButton" visibility="private"/>
+        <Field name="thirdClassCheck" type="RadioButton" visibility="private"/>
+        <Field name="classInfoButton" type="Button" visibility="private"/>
+        <Field name="cancelButton" type="Button" visibility="private"/>
+        <Field name="createPacket" type="Button" visibility="private"/>
+        <Field name="sourceCityCombo" type="ComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="sourceMachineCombo" type="ComboBox&lt;PackageMachine&gt;" visibility="private"/>
+        <Field name="destinationCityCombo" type="ComboBox&lt;String&gt;" visibility="private"/>
+        <Field name="destinationMachineCombo" type="ComboBox&lt;PackageMachine&gt;" visibility="private"/>
+        <Field name="instance" type="FXMLNewPacketWindowController" visibility="private" isStatic="true"/>
+        <Field name="editingItemIndex" type="int" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="GetInstance" returnType="FXMLNewPacketWindowController" visibility="public" isStatic="true"/>
+        <Method name="initialize" returnType="void" visibility="public">
+          <Argument type="URL" name="url"/>
+          <Argument type="ResourceBundle" name="rb"/>
+        </Method>
+        <Method name="addItemsToPrebuiltCombo" returnType="void" visibility="private"/>
+        <Method name="addItemsToCityCombos" returnType="void" visibility="private"/>
+        <Method name="classInfoButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="cancelButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="createPacketButtonAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="getItem" returnType="Item" visibility="private"/>
+        <Method name="getPacketClass" returnType="int" visibility="private"/>
+        <Method name="originClosedAction" returnType="void" visibility="private">
+          <Argument type="Event" name="event"/>
+        </Method>
+        <Method name="destinationClosedAction" returnType="void" visibility="private">
+          <Argument type="Event" name="event"/>
+        </Method>
+        <Method name="addMachinesToOriginCombo" returnType="void" visibility="private"/>
+        <Method name="addMachinesToDestinationCombo" returnType="void" visibility="private"/>
+        <Method name="prebuiltComboAction" returnType="void" visibility="private">
+          <Argument type="ActionEvent" name="event"/>
+        </Method>
+        <Method name="LoadPackageInfo" returnType="void" visibility="public">
+          <Argument type="Package" name="p"/>
+          <Argument type="int" name="index"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="GeoPoint" package="harkkatyö" visibility="public" xPosition="1622.0" yPosition="1049.0">
+      <Fields>
+        <Field name="address" type="Address" visibility="private"/>
+        <Field name="latitude" type="double" visibility="private"/>
+        <Field name="longitude" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="Address" name="a"/>
+          <Argument type="double" name="lat"/>
+          <Argument type="double" name="lng"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="GetAddress" returnType="Address" visibility="public"/>
+        <Method name="GetLatitude" returnType="double" visibility="public"/>
+        <Method name="GetLongitude" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Harkkatyö" package="harkkatyö" visibility="public" xPosition="334.0" yPosition="635.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="start" returnType="void" visibility="public">
+          <Argument type="Stage" name="stage"/>
+        </Method>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="InvalidRouteException" package="harkkatyö" visibility="public" xPosition="49.0" yPosition="764.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Item" package="harkkatyö" visibility="public" xPosition="731.0" yPosition="20.0">
+      <Fields>
+        <Field name="name" type="String" visibility="protected"/>
+        <Field name="dimensions" type="Float[]" visibility="protected"/>
+        <Field name="weight" type="Float" visibility="protected"/>
+        <Field name="fragile" type="Boolean" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="String" name="n"/>
+          <Argument type="Float[]" name="d"/>
+          <Argument type="Float" name="w"/>
+          <Argument type="Boolean" name="f"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="DimensionsToString" returnType="String" visibility="public"/>
+        <Method name="GetDimensions" returnType="Float[]" visibility="public"/>
+        <Method name="GetWeight" returnType="Float" visibility="public"/>
+        <Method name="GetFragility" returnType="Boolean" visibility="public"/>
+        <Method name="GetName" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="JourneyLengthException" package="harkkatyö" visibility="public" xPosition="49.0" yPosition="1170.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="MingVase" package="harkkatyö" visibility="public" xPosition="482.0" yPosition="133.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Package" package="harkkatyö" visibility="public" isAbstract="true" xPosition="1041.0" yPosition="789.0">
+      <Fields>
+        <Field name="speed" type="int" visibility="protected"/>
+        <Field name="dimensions" type="Float[]" visibility="protected"/>
+        <Field name="containsItem" type="Item" visibility="private"/>
+        <Field name="originMachine" type="PackageMachine" visibility="protected"/>
+        <Field name="destinationMachine" type="PackageMachine" visibility="protected"/>
+        <Field name="classInt" type="int" visibility="protected"/>
+        <Field name="classString" type="String" visibility="protected"/>
+        <Field name="maxDistance" type="int" visibility="protected"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="PackageMachine" name="orig"/>
+          <Argument type="PackageMachine" name="dest"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="GetMaxDistance" returnType="int" visibility="public"/>
+        <Method name="SetItem" returnType="void" visibility="public">
+          <Argument type="Item" name="i"/>
+        </Method>
+        <Method name="GetItem" returnType="Item" visibility="public"/>
+        <Method name="GetClassInt" returnType="int" visibility="public"/>
+        <Method name="GetClassString" returnType="String" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="GetOriginMachine" returnType="PackageMachine" visibility="public"/>
+        <Method name="GetDestinationMachine" returnType="PackageMachine" visibility="public"/>
+        <Method name="GetSpeed" returnType="int" visibility="public"/>
+        <Method name="GetDimensionsString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="PackageMachine" package="harkkatyö" visibility="public" xPosition="1622.0" yPosition="748.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private"/>
+        <Field name="location" type="GeoPoint" visibility="private"/>
+        <Field name="availabilityInfo" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="String" name="n"/>
+          <Argument type="GeoPoint" name="loc"/>
+          <Argument type="String" name="availability"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="GetName" returnType="String" visibility="public"/>
+        <Method name="GetAvailability" returnType="String" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+        <Method name="GetLocation" returnType="GeoPoint" visibility="public"/>
+        <Method name="compareTo" returnType="int" visibility="public">
+          <Argument type="Object" name="o"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PackageMachineManager" package="harkkatyö" visibility="public" xPosition="2205.0" yPosition="501.0">
+      <Fields>
+        <Field name="instance" type="PackageMachineManager" visibility="private" isStatic="true"/>
+        <Field name="machines" type="ArrayList&lt;PackageMachine&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="GetInstance" returnType="PackageMachineManager" visibility="public" isStatic="true"/>
+        <Method name="InitMachineList" returnType="void" visibility="public"/>
+        <Method name="GetMachineList" returnType="ArrayList&lt;PackageMachine&gt;" visibility="public"/>
+        <Method name="AddMachine" returnType="void" visibility="public">
+          <Argument type="PackageMachine" name="m"/>
+        </Method>
+        <Method name="GetUniqueCities" returnType="ArrayList&lt;String&gt;" visibility="public"/>
+        <Method name="GetMachinesAtCity" returnType="ArrayList&lt;PackageMachine&gt;" visibility="public">
+          <Argument type="String" name="city"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PackageSizeException" package="harkkatyö" visibility="public" xPosition="49.0" yPosition="902.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public"/>
+        <Constructor visibility="public">
+          <Argument type="String" name="message"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="SecondClassPackage" package="harkkatyö" visibility="public" xPosition="506.0" yPosition="916.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="PackageMachine" name="source"/>
+          <Argument type="PackageMachine" name="dest"/>
+        </Constructor>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Storage" package="harkkatyö" visibility="public" xPosition="1041.0" yPosition="1264.0">
+      <Fields>
+        <Field name="instance" type="Storage" visibility="private" isStatic="true"/>
+        <Field name="packagesInStorage" type="ArrayList&lt;Package&gt;" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods>
+        <Method name="GetInstance" returnType="Storage" visibility="public" isStatic="true"/>
+        <Method name="GetPackages" returnType="ArrayList&lt;Package&gt;" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="TableLamp" package="harkkatyö" visibility="public" xPosition="305.0" yPosition="133.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="Teddybear" package="harkkatyö" visibility="public" xPosition="482.0" yPosition="246.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package"/>
+      </Constructors>
+      <Methods/>
+    </Class>
+    <Class name="ThirdClassPackage" package="harkkatyö" visibility="public" xPosition="511.0" yPosition="1035.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="package">
+          <Argument type="PackageMachine" name="source"/>
+          <Argument type="PackageMachine" name="dest"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="SetItem" returnType="void" visibility="public">
+          <Argument type="Item" name="item"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Utilities" package="harkkatyö" visibility="public" xPosition="2029.0" yPosition="916.0">
+      <Fields>
+        <Field name="instance" type="Utilities" visibility="private" isStatic="true"/>
+        <Field name="dt" type="DateFormat" visibility="package"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="GetInstance" returnType="Utilities" visibility="public" isStatic="true"/>
+        <Method name="ShowError" returnType="void" visibility="public">
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="ShowMessage" returnType="void" visibility="public">
+          <Argument type="String" name="headerText"/>
+          <Argument type="String" name="bodyText"/>
+        </Method>
+        <Method name="WriteToLog" returnType="void" visibility="public">
+          <Argument type="String" name="text"/>
+        </Method>
+        <Method name="WriteFinalLogToFile" returnType="void" visibility="public"/>
+        <Method name="SaveState" returnType="void" visibility="public"/>
+        <Method name="LoadState" returnType="void" visibility="public"/>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="originMachine" source="harkkatyö.Package" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.TableLamp" target="harkkatyö.Item"/>
+    <HasRelation name="prebuiltCombo" source="harkkatyö.FXMLNewPacketWindowController" target="harkkatyö.Item" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.Storage" target="harkkatyö.Package" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.FirstClassPackage" target="harkkatyö.Package"/>
+    <HasRelation name="machines" source="harkkatyö.PackageMachineManager" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;PackageMachine&gt;"/>
+    <IsRelation name="is" source="harkkatyö.Teddybear" target="harkkatyö.Item"/>
+    <HasRelation name="location" source="harkkatyö.PackageMachine" target="harkkatyö.GeoPoint" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.FXMLMapViewWindowController" target="harkkatyö.Package" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.BarrelOfLube" target="harkkatyö.Item"/>
+    <HasRelation name="address" source="harkkatyö.GeoPoint" target="harkkatyö.Address" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.Package" target="harkkatyö.PackageMachine" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="destinationMachine" source="harkkatyö.Package" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.Package" target="harkkatyö.Item" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.FXMLNewPacketWindowController" target="harkkatyö.Package" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="packagesInStorageCombo" source="harkkatyö.FXMLMapViewWindowController" target="harkkatyö.Package" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.FXMLNewPacketWindowController" target="harkkatyö.Item" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.CanOfWorms" target="harkkatyö.Item"/>
+    <HasRelation name="containsItem" source="harkkatyö.Package" target="harkkatyö.Item" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="destinationMachineCombo" source="harkkatyö.FXMLNewPacketWindowController" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.MingVase" target="harkkatyö.Item"/>
+    <UseRelation source="harkkatyö.ThirdClassPackage" target="harkkatyö.Item" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="packagesInStorage" source="harkkatyö.Storage" target="harkkatyö.Package" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Package&gt;"/>
+    <IsRelation name="is" source="harkkatyö.SecondClassPackage" target="harkkatyö.Package"/>
+    <UseRelation source="harkkatyö.FirstClassPackage" target="harkkatyö.Item" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.PackageMachineManager" target="harkkatyö.PackageMachine" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="harkkatyö.ThirdClassPackage" target="harkkatyö.Package"/>
+    <HasRelation name="sourceMachineCombo" source="harkkatyö.FXMLNewPacketWindowController" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.GeoPoint" target="harkkatyö.Address" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="harkkatyö.PackageMachine" target="harkkatyö.GeoPoint" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="machinesOnMap" source="harkkatyö.FXMLMapViewWindowController" target="harkkatyö.PackageMachine" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;PackageMachine&gt;"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

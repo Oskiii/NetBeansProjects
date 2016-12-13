@@ -1,12 +1,6 @@
 
-[10.12.2016 16:57:04]		--------- TIMO LOG ---------
-[10.12.2016 16:57:04]	Initialized TIMO with 479 machines.
-[10.12.2016 16:57:14]	Created package: Can of Worms, 3rd Class (EURA -> HANKO)
-[10.12.2016 16:57:23]	Added machine onto map: S-market Eura - Satakunnankatu 4, 27515 EURA
-[10.12.2016 16:57:27]	Added machine onto map: K-supermarket Hanko - Revellinkatu 2, 10905 HANKO
-[10.12.2016 16:57:31]	Added machine onto map: K-supermarket Hanko - Revellinkatu 2, 10905 HANKO
-[10.12.2016 16:57:33]	Added machine onto map: K-supermarket Hanko - Revellinkatu 2, 10905 HANKO
-[10.12.2016 16:57:36]	Shipped package Can of Worms, 3rd Class
+[13.12.2016 12:40:59]		--------- TIMO LOG ---------
+[13.12.2016 12:40:59]	Initialized TIMO with 479 machines.
 
 
-[10.12.2016 16:57:45]	Storage: 
+[13.12.2016 12:41:17]	Storage: 

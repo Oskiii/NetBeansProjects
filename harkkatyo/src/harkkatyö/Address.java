@@ -19,15 +19,15 @@ public class Address {
         address = a; 
     }
     
-    public String GetCity(){
+    public String getCity(){
         return city;
     }
     
-    public String GetStreetAddress(){
+    public String getStreetAddress(){
         return address;
     }
     
-    public int GetPostcode(){
+    public int getPostcode(){
         return postCode;
     }
     

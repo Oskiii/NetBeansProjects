@@ -162,6 +162,7 @@ public class FXMLNewPacketWindowController implements Initializable {
         } catch (FragilityException ex) {
             //tried to add into unsuitable package
             Utilities.GetInstance().showError("Class isn't suitable for fragile items!");
+            return;
         }
 
         

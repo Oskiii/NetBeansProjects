@@ -1,6 +1,46 @@
 
-[13.12.2016 12:58:01]		--------- TIMO LOG ---------
-[13.12.2016 12:58:01]	Initialized TIMO with 479 machines.
+[13.12.2016 13:34:27]		--------- TIMO LOG ---------
+[13.12.2016 13:34:27]	Initialized TIMO with 479 machines.
+[13.12.2016 13:34:45]	Added machine onto map: S-market Pohjois-Tapiola - Kalevalantie 3, 2135 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: K-market Kilo - Kilonpuistonkatu 14, 2615 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Viherlaakso - Kuusiniementie 1, 2715 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Kauppakeskus Espoontori - Kamreerintie 3, 2775 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Merituulen kauppakeskus - Isonniitynkuja 2, 2275 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Stockmann Tapiola - Länsituulentie 5, 2105 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Kauppakeskus Sello - Leppävaarankatu 3 A, 2605 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Lähderanta - Lähderanta 1, 2725 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Kauppakeskus Lippulaiva - Espoonlahdenkatu 4, 2325 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Haukilahti - Ukkohauentie 11-13, 2175 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Espoonkeskus - Sunantie 1, 2765 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Juvankartano - Juvankartanontie 33, 2925 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: K-Supermarket Aurora - Kylänportti 16, 2945 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-Market Nihtisilta - Kutojantie 1, 2635 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Prisma Olari - Komeetankatu 2, 2215 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Prisma Sello - Leppävaarankatu 5, 2605 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Matinkylä - Matinkatu 22, 2235 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Malminmäki - Malminkorpi 1, 2285 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Kauppakeskus Iso Omena - Piispansilta 11, 2235 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: K-supermarket, Mankkaa - Sinikalliontie 1, 2635 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Tuomarila - Pitkännotkontie 27, 2755 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Aalto-Yliopisto Otaniemi - Sähkömiehentie 3, 2155 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: K-market Resiina - Virastopiha 1, 2775 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-Market Olari - Kuunkatu 3, 2215 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Kivenlahti - Merivirta 3, 2325 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-market Saunalahti - Magneettikatu 2, 2335 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Lintuvaara - Linnuntie 2, 2665 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: Alepa Soukka - Soukantie 4, 2365 ESPOO
+[13.12.2016 13:34:45]	Added machine onto map: S-Market Kivenlahdentie - Kivenlahdentie 9, 2325 ESPOO
+[13.12.2016 13:34:53]	Added machine onto map: Sale Hakatori - Torikatu 12, 67105 KOKKOLA
+[13.12.2016 13:34:53]	Added machine onto map: Prisma Kokkola - Prismantie 1, 67705 KOKKOLA
+[13.12.2016 13:34:53]	Added machine onto map: K-citymarket Kokkola - Heinolankaari 9, 67605 KOKKOLA
+[13.12.2016 13:34:53]	Added machine onto map: Minimani Kokkola - Tehtaankatu 43, 67105 KOKKOLA
+[13.12.2016 13:35:25]	Created package: Ming Vase, 2nd Class (ESPOO -> KOKKOLA)
+[13.12.2016 13:35:31]	Edited package: Ming sdfsfg, 2nd Class [ESPOO -> KOKKOLA]	(Old: Ming Vase, 2nd Class [ESPOO -> KOKKOLA])
+[13.12.2016 13:35:37]	Shipped package Ming sdfsfg, 2nd Class
+[13.12.2016 13:36:04]	Created package: Table Lamp, 3rd Class (ESPOO -> KOKKOLA)
+[13.12.2016 13:36:25]	Created package: Teddybear, 3rd Class (ESPOO -> KOKKOLA)
 
 
-[13.12.2016 12:58:15]	Storage: 
+[13.12.2016 13:36:57]	Storage: 
+[13.12.2016 13:36:57]	Table Lamp, 3rd Class
+[13.12.2016 13:36:57]	Teddybear, 3rd Class
